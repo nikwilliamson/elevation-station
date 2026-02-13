@@ -232,8 +232,8 @@ function curve01(x, curve) {
  * @property {number} depth        0..1
  * @property {number} lightX       -1..1
  * @property {number} lightY       -1..1
- * @property {number} oomph        0..1
- * @property {number} crispy       0..1
+ * @property {number} intensity    0..1
+ * @property {number} hardness     0..1
  * @property {number} resolution   0..1 (used only when layerCount not set)
  * @property {number=} layerCount  explicit integer layer count (2..10)
  * @property {ShadowCurves=} curves
@@ -246,17 +246,17 @@ const _stackCache = new Map();
  *
  * Calibrated against reference shadows from Josh Comeau's shadow palette generator.
  * Key design:
- * - Blur is a constant ratio of offset, controlled by crispy (2.1× soft → 1.05× crispy)
+ * - Blur is a constant ratio of offset, controlled by hardness (2.1× soft → 1.05× hard)
  * - Spread is a fixed max (5px at C=1), linearly distributed across layers
- * - Alpha uses simple linear ramps: increasing for soft, decreasing for crispy, uniform at mid
+ * - Alpha uses simple linear ramps: increasing for soft, decreasing for hard, uniform at mid
  * - Light direction uses eased values directly (not normalized)
  * - Offset range has wide dynamic range across depth levels
  */
-export function buildShadowStack({ depth, lightX, lightY, oomph, crispy, resolution, layerCount, curves }) {
+export function buildShadowStack({ depth, lightX, lightY, intensity, hardness, resolution, layerCount, curves }) {
   // Normalize inputs
   const E = clamp01(isFiniteNumber(depth) ? depth : 0);
-  const O = clamp01(isFiniteNumber(oomph) ? oomph : 0);
-  const C = clamp01(isFiniteNumber(crispy) ? crispy : 0);
+  const O = clamp01(isFiniteNumber(intensity) ? intensity : 0);
+  const C = clamp01(isFiniteNumber(hardness) ? hardness : 0);
   const R = clamp01(isFiniteNumber(resolution) ? resolution : 0);
 
   const rawLx = clamp(-1, 1, isFiniteNumber(lightX) ? lightX : 0);
@@ -291,7 +291,7 @@ export function buildShadowStack({ depth, lightX, lightY, oomph, crispy, resolut
   }
 
   // ── Offset range ────────────────────────────────────────────────────────────
-  // Wide dynamic range: ~3px at low depth/oomph → 150px at high depth/oomph.
+  // Wide dynamic range: ~3px at low depth/intensity → 150px at high depth/intensity.
   // O=0 and O=1 follow different depth curves, then lerp between them.
   const offsetMin = 1;
   const offsetAtO0 = curves?.offsetGrowth
@@ -304,16 +304,16 @@ export function buildShadowStack({ depth, lightX, lightY, oomph, crispy, resolut
 
   // ── Blur ────────────────────────────────────────────────────────────────────
   //   Soft (C=0):   blur = 2.1× offset  (big diffuse glow)
-  //   Crispy (C=1): blur = 1.05× offset (sharp defined edge)
+  //   Hard (C=1): blur = 1.05× offset (sharp defined edge)
   const blurRatio = lerp(2.1, 1.05, C);
 
   // ── Spread ──────────────────────────────────────────────────────────────────
-  // Fixed max spread based on crispy, linearly distributed across layers.
-  // Soft: no spread. Crispy: up to -5px on the outermost layer.
+  // Fixed max spread based on hardness, linearly distributed across layers.
+  // Soft: no spread. Hard: up to -5px on the outermost layer.
   const spreadMax = lerp(0, 5, C);
 
   // ── Layer distribution ──────────────────────────────────────────────────────
-  // Power curve: soft layers spread more evenly, crispy bunches near contact.
+  // Power curve: soft layers spread more evenly, hard bunches near contact.
   const defaultDistPower = lerp(1.7, 3.0, C);
 
   function layerU(t) {
@@ -322,12 +322,12 @@ export function buildShadowStack({ depth, lightX, lightY, oomph, crispy, resolut
   }
 
   // ── Alpha ───────────────────────────────────────────────────────────────────
-  // Simple linear ramps that blend based on crispy:
+  // Simple linear ramps that blend based on hardness:
   //   Soft  (C=0): alpha increases from 0 (contact) to peak (outermost)
-  //   Crispy(C=1): alpha decreases from peak×N/(N-1) (contact) to peak/(N-1)
+  //   Hard  (C=1): alpha decreases from peak×N/(N-1) (contact) to peak/(N-1)
   //   Mid   (C≈0.5): uniform alpha across all layers (the two ramps cancel)
   //
-  // Peak alpha is controlled by oomph: 0.22 at O=0, 0.72 at O=1.
+  // Peak alpha is controlled by intensity: 0.22 at O=0, 0.72 at O=1.
   const peak = lerp(0.22, 0.72, O);
 
   // Optional alpha curve reshaping (from editor)
@@ -349,10 +349,10 @@ export function buildShadowStack({ depth, lightX, lightY, oomph, crispy, resolut
     const blur = offset * blurRatio;
     const spread = -spreadMax * t;
 
-    // Alpha: blend between soft ramp (increasing) and crispy ramp (decreasing)
-    const softAlpha = peak * t;                    // 0 at contact → peak at edge
-    const crispyAlpha = peak * (N - i) / (N - 1);  // peak×N/(N-1) at contact → peak/(N-1) at edge
-    let alpha = lerp(softAlpha, crispyAlpha, C) * alphaShape(t);
+    // Alpha: blend between soft ramp (increasing) and hard ramp (decreasing)
+    const softAlpha = peak * t;                   // 0 at contact → peak at edge
+    const hardAlpha = peak * (N - i) / (N - 1);   // peak×N/(N-1) at contact → peak/(N-1) at edge
+    let alpha = lerp(softAlpha, hardAlpha, C) * alphaShape(t);
     alpha = clamp01(alpha);
 
     const xStr = formatPx(x);
@@ -422,12 +422,12 @@ function unwrapTokenValue(maybeToken) {
  *   shadow.color.hsl             — default shadow color
  *   elevation.{name}.depth       — per-level depth
  *   elevation.{name}.resolution  — per-level *layer count* (3, 5, or 7)
- *   elevation.{name}.oomph       — per-level oomph
- *   elevation.{name}.crispy      — per-level crispy
+ *   elevation.{name}.intensity   — per-level intensity
+ *   elevation.{name}.hardness    — per-level hardness
  *   interaction.resolution       — shared *layer count* for interactive states
  *   interaction.{state}.depth    — per-state depth
- *   interaction.{state}.oomph    — per-state oomph
- *   interaction.{state}.crispy   — per-state crispy
+ *   interaction.{state}.intensity — per-state intensity
+ *   interaction.{state}.hardness  — per-state hardness
  *
  * Returns [] if elevation_new tokens aren't present.
  */
@@ -450,18 +450,18 @@ export function buildShadowCssVars(dictionaryTokens) {
     const depth = Number(unwrapTokenValue(cfg?.depth));
     if (!Number.isFinite(depth)) continue;
 
-    const oomph = Number(unwrapTokenValue(cfg?.oomph) ?? 0.25);
-    const crispy = Number(unwrapTokenValue(cfg?.crispy) ?? 0.25);
+    const intensity = Number(unwrapTokenValue(cfg?.intensity) ?? 0.25);
+    const hardness = Number(unwrapTokenValue(cfg?.hardness) ?? 0.25);
 
-    // NOTE: token calls this "resolution", but it’s actually an explicit layer count in your system.
+    // NOTE: token calls this "resolution", but it's actually an explicit layer count in your system.
     const layerCount = Number(unwrapTokenValue(cfg?.resolution) ?? 5);
 
     const stack = buildShadowStack({
       depth,
       lightX,
       lightY,
-      oomph,
-      crispy,
+      intensity,
+      hardness,
       resolution: 0, // unused when layerCount is set
       layerCount,
       curves: undefined, // hook up if/when you add curve tokens
@@ -484,15 +484,15 @@ export function buildShadowCssVars(dictionaryTokens) {
       const depth = Number(unwrapTokenValue(stateCfg.depth));
       if (!Number.isFinite(depth)) continue;
 
-      const oomph = Number(unwrapTokenValue(stateCfg.oomph) ?? 0.25);
-      const crispy = Number(unwrapTokenValue(stateCfg.crispy) ?? 0.25);
+      const intensity = Number(unwrapTokenValue(stateCfg.intensity) ?? 0.25);
+      const hardness = Number(unwrapTokenValue(stateCfg.hardness) ?? 0.25);
 
       const stack = buildShadowStack({
         depth,
         lightX,
         lightY,
-        oomph,
-        crispy,
+        intensity,
+        hardness,
         resolution: 0,
         layerCount: interactionLayerCount,
         curves: undefined,

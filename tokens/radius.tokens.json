@@ -1,8 +1,8 @@
 {
   "radius": {
-    "xs":   { "$value": "0.375rem", "$type": "dimension" },
-    "sm":   { "$value": "0.5rem",   "$type": "dimension" },
-    "md":   { "$value": "0.75rem",  "$type": "dimension" },
-    "lg":   { "$value": "1rem",     "$type": "dimension" }
+    "xs":   { "$value": "0.134rem", "$type": "dimension" },
+    "sm":   { "$value": "0.25rem",  "$type": "dimension" },
+    "md":   { "$value": "0.375rem", "$type": "dimension" },
+    "lg":   { "$value": "0.5rem",   "$type": "dimension" }
   }
 }

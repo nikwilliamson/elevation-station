@@ -1,0 +1,130 @@
+/* ── Tab Select ──────────────────────────────────────────────────────── */
+
+.es-tab-select {
+  background: var(--color-neutral-900);
+  border-radius: var(--radius-md);
+  border: var(--border-default-width) solid var(--color-neutral-700);
+  padding: 3px;
+}
+
+.es-tab-select__list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2px;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.es-tab-select__item {
+  display: grid;
+}
+
+.es-tab-select__item > * {
+  grid-area: 1 / 1;
+}
+
+.es-tab-select__indicator {
+  z-index: 1;
+  border-radius: var(--radius-sm);
+  background: var(--color-brand-blue);
+}
+
+.es-tab-select__btn {
+  z-index: 2;
+  color: var(--color-neutral-400);
+  background: transparent;
+  border: none;
+  border-radius: var(--radius-sm);
+  white-space: nowrap;
+  cursor: pointer;
+  transition: color var(--motion-duration-fast) var(--motion-easing-standard);
+}
+
+/* ── Sizes ───────────────────────────────────────────────────────────── */
+
+.es-tab-select--sm .es-tab-select__btn {
+  padding: 4px 8px;
+  font-size: var(--text-size-80);
+  font-weight: 600;
+  line-height: 1;
+}
+
+.es-tab-select--md .es-tab-select__btn {
+  padding: var(--inset-compact) var(--inset-normal);
+  font: var(--typography-200-bold);
+}
+
+.es-tab-select--lg .es-tab-select__btn {
+  padding: var(--inset-compact) var(--inset-normal);
+  font: var(--typography-300-bold);
+}
+
+.es-tab-select__btn:hover {
+  color: var(--color-neutral-200);
+}
+
+.es-tab-select__item[aria-selected='true'] .es-tab-select__btn {
+  color: var(--color-brand-white);
+}
+
+/* ── Loose (non-contained) variant ───────────────────────────────────── */
+
+.es-tab-select--loose {
+  background: none;
+  border: none;
+  padding: 0;
+  border-radius: 0;
+}
+
+.es-tab-select--loose .es-tab-select__list {
+  gap: var(--gap-compact);
+}
+
+.es-tab-select--loose .es-tab-select__btn {
+  border: var(--border-default-width) solid var(--color-neutral-600);
+}
+
+.es-tab-select--loose .es-tab-select__item[aria-selected='true'] .es-tab-select__btn {
+  border-color: transparent;
+}
+
+/* ── Border (underline) variant ────────────────────────────────────── */
+
+.es-tab-select--border {
+  background: none;
+  border: none;
+  border-bottom: 4px solid var(--color-neutral-700);
+  border-radius: 0;
+  padding: 0;
+}
+
+.es-tab-select--border.es-tab-select--sm .es-tab-select__list {
+  gap: calc(8px * 2 + 2px);
+}
+
+.es-tab-select--border.es-tab-select--md .es-tab-select__list {
+  gap: calc(var(--inset-normal) * 2 + 2px);
+}
+
+.es-tab-select--border.es-tab-select--lg .es-tab-select__list {
+  gap: calc(var(--inset-normal) * 2 + 2px);
+}
+
+.es-tab-select--border .es-tab-select__item {
+  align-items: end;
+}
+
+.es-tab-select--border .es-tab-select__indicator {
+  border-radius: 0;
+  background: var(--color-brand-yellow);
+  height: 4px;
+  align-self: end;
+  margin-bottom: -4px;
+}
+
+.es-tab-select--border .es-tab-select__btn {
+  border-radius: 0;
+  padding-left: 0;
+  padding-right: 0;
+}

@@ -8,77 +8,148 @@
 
 body {
   margin: 0;
-  font-family: Inter, sans-serif;
+  overflow: hidden;
+  font: var(--typography-300-regular);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  background: var(--color-neutral-100);
-  color: var(--color-neutral-800);
+  background: var(--color-brand-black);
+  color: var(--color-brand-white);
 }
 
-/* ── Nav ──────────────────────────────────────────────────────────── */
+/* ── App shell ───────────────────────────────────────────────────── */
 
-.es-nav {
+.es-app {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  overflow: hidden;
+  margin-right: 1rem;
+}
+
+/* ── Scrollbars ──────────────────────────────────────────────────── */
+
+* {
+  scrollbar-width: thin;
+  scrollbar-color: var(--color-neutral-600) transparent;
+}
+
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--color-neutral-600);
+  border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--color-neutral-500);
+}
+
+::selection {
+  color: var(--color-brand-white);
+  background: var(--color-brand-pink);
+}
+
+/* ── Gradient border (matches personal site) ─────────────────────── */
+
+.es-gradient-border {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  width: 1rem;
+  background: linear-gradient(
+    to bottom,
+    var(--color-brand-yellow),
+    var(--color-brand-pink),
+    var(--color-brand-blue)
+  );
+  z-index: 10;
+  pointer-events: none;
+}
+
+/* ── Switch ──────────────────────────────────────────────────────── */
+
+.es-switch {
   display: flex;
   align-items: center;
-  gap: var(--gap-dense);
-  padding: var(--inset-normal) var(--inset-spacious);
-  background: var(--color-neutral-0);
-  border-bottom: var(--border-subtle-shorthand);
-}
-
-.es-nav__title {
-  font: 700 1rem/1.5rem Inter, sans-serif;
-  color: var(--color-neutral-800);
-  margin: 0;
-  margin-right: auto;
-}
-
-.es-nav__tab {
-  padding: var(--inset-compact) var(--inset-normal);
-  font: var(--typography-200-bold);
-  border: var(--border-default-width) solid transparent;
-  border-radius: var(--radius-sm);
-  background: transparent;
-  color: var(--color-neutral-600);
   cursor: pointer;
+}
+
+.es-switch--with-label {
+  gap: var(--gap-dense);
+  user-select: none;
+}
+
+.es-switch__label {
+  font: var(--typography-200-bold);
+  color: var(--color-neutral-400);
+}
+
+.es-switch__input {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+}
+
+.es-switch__track {
+  position: relative;
+  width: 2.25rem;
+  height: 1.25rem;
+  border-radius: 1rem;
+  background: var(--color-neutral-700);
+  transition: background var(--motion-duration-fast) var(--motion-easing-standard);
+}
+
+.es-switch__track::after {
+  content: '';
+  position: absolute;
+  top: 0.1875rem;
+  left: 0.1875rem;
+  width: 0.875rem;
+  height: 0.875rem;
+  border-radius: 50%;
+  background: var(--color-neutral-400);
   transition:
-    background var(--motion-duration-fast) var(--motion-easing-standard),
-    color var(--motion-duration-fast) var(--motion-easing-standard),
-    border-color var(--motion-duration-fast) var(--motion-easing-standard);
+    transform var(--motion-duration-fast) var(--motion-easing-standard),
+    background var(--motion-duration-fast) var(--motion-easing-standard);
 }
 
-.es-nav__tab:hover {
-  background: var(--color-neutral-100);
-  color: var(--color-neutral-800);
+.es-switch__input:checked + .es-switch__track {
+  background: var(--color-brand-pink);
 }
 
-.es-nav__tab[aria-selected='true'] {
-  background: var(--color-union-100);
-  border-color: var(--color-union-300);
-  color: var(--color-union-700);
+.es-switch__input:checked + .es-switch__track::after {
+  transform: translateX(1rem);
+  background: var(--color-brand-white);
+}
+
+.es-switch__input:focus-visible + .es-switch__track {
+  outline: 2px solid var(--color-brand-pink);
+  outline-offset: 2px;
 }
 
 /* ── Title replacements ───────────────────────────────────────────── */
 
 .es-title {
   margin: 0;
-  color: var(--color-neutral-800);
+  color: var(--color-brand-white);
 }
 
 .es-title--lg {
-  font: 700 1.802rem/2rem Inter, sans-serif;
+  font: var(--typography-600-bold);
 }
 
 .es-title--sm {
-  font: 600 0.889rem/1.5rem Inter, sans-serif;
-}
-
-/* ── Label replacement ────────────────────────────────────────────── */
-
-.es-label {
-  font: var(--typography-200-bold);
-  color: var(--color-neutral-800);
-  display: block;
+  font: var(--typography-500-bold);
 }
 
 /* ── Button replacements ──────────────────────────────────────────── */
@@ -101,29 +172,87 @@ body {
 
 .es-btn--ghost {
   background: transparent;
-  border-color: var(--color-neutral-300);
-  color: var(--color-neutral-700);
+  border-color: var(--color-neutral-600);
+  color: var(--color-neutral-300);
 }
 
 .es-btn--ghost:hover {
-  background: var(--color-neutral-100);
-  color: var(--color-neutral-800);
+  background: var(--color-neutral-800);
+  color: var(--color-brand-white);
 }
 
 .es-btn--primary {
-  background: var(--color-union-500);
-  color: var(--color-neutral-0);
+  background: var(--color-brand-pink);
+  color: var(--color-brand-white);
 }
 
 .es-btn--primary:hover {
-  background: var(--color-union-600);
+  background: var(--color-pink-500);
 }
 
 .es-btn--positive {
   background: var(--color-green-500);
-  color: var(--color-neutral-0);
+  color: var(--color-brand-white);
 }
 
 .es-btn--positive:hover {
   background: var(--color-green-600);
+}
+
+/* ── Light mode ──────────────────────────────────────────────────── */
+
+[data-theme="light"] {
+  /* Swap surface & text */
+  --color-brand-black: oklch(100% 0 135.24);
+  --color-brand-white: oklch(19.27% 0.0747 292.99);
+
+  /* Flip neutral scale */
+  --color-neutral-200: oklch(25% 0.066 292.99);
+  --color-neutral-300: oklch(31.5% 0.06 292.99);
+  --color-neutral-400: oklch(56.5% 0.048 293);
+  --color-neutral-500: oklch(70.5% 0.042 293);
+  --color-neutral-600: oklch(82% 0.038 293);
+  --color-neutral-700: oklch(88.5% 0.036 293);
+  --color-neutral-800: oklch(90.5% 0.032 293);
+
+  /* Light border */
+  --border-subtle-shorthand: 0.5px solid oklch(88.5% 0.036 293);
+
+  /* Pink tints for light hover surfaces */
+  --color-pink-900: oklch(90.5% 0.048 330.4);
+}
+
+/* Selection → yellow highlight in light mode (matches personal site) */
+[data-theme="light"] ::selection {
+  color: var(--color-brand-white);
+  background: var(--color-brand-yellow);
+}
+
+/* Containers: white + border only in light mode */
+[data-theme="light"] .es-shadow-token-designer {
+  --spg-card-bg: var(--color-neutral-0);
+}
+
+[data-theme="light"] .es-interaction-designer {
+  --sid-card-bg: var(--color-neutral-0);
+}
+
+/* Elements that need to stay visually white despite the brand swap */
+[data-theme="light"] .es-shadow-token-designer__preview-card {
+  background: var(--color-neutral-0);
+}
+
+[data-theme="light"] .es-switch__input:checked + .es-switch__track::after {
+  background: var(--color-neutral-0);
+}
+
+[data-theme="light"] .es-btn--primary,
+[data-theme="light"] .es-btn--positive {
+  color: var(--color-neutral-0);
+}
+
+[data-theme="light"] .es-toggle-group__btn[aria-pressed='true'],
+[data-theme="light"] .es-bezier-editor__preset-btn[aria-pressed='true'],
+[data-theme="light"] .es-color-picker__none-btn[aria-pressed='true'] {
+  color: var(--color-neutral-0);
 }

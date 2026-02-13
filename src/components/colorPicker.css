@@ -1,0 +1,95 @@
+/* ── ColorPicker ─────────────────────────────────────────────────────── */
+
+.es-color-picker {
+  position: relative;
+  gap: var(--gap-compact);
+  display: flex;
+  flex-direction: column;
+}
+
+/* ── Closed-state field row ─────────────────────────────────────────── */
+
+.es-color-picker__field {
+  display: flex;
+  align-items: center;
+  gap: var(--gap-compact);
+}
+
+/* ── Swatch trigger ─────────────────────────────────────────────────── */
+
+.es-color-picker__swatch {
+  width: 1.5rem;
+  height: 1.5rem;
+  border-radius: var(--radius-sm);
+  border: var(--border-default-width) solid var(--color-neutral-600);
+  padding: 0;
+  cursor: pointer;
+  flex-shrink: 0;
+  transition:
+    border-color var(--motion-duration-fast) var(--motion-easing-standard),
+    opacity var(--motion-duration-standard) var(--motion-easing-standard);
+}
+
+.es-color-picker__swatch:hover:not(:disabled) {
+  border-color: var(--color-neutral-400);
+}
+
+.es-color-picker__swatch:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+/* ── Text input (layout overrides – base styles via TextInput) ──────── */
+
+.es-color-picker__input {
+  flex: 1;
+  max-width: 240px;
+}
+
+/* ── Popover ────────────────────────────────────────────────────────── */
+
+.es-color-picker__popover {
+  position: absolute;
+  top: calc(100% + var(--gap-compact));
+  left: 0;
+  z-index: 100;
+  background: var(--color-neutral-900);
+  border: var(--border-default-width) solid var(--color-neutral-600);
+  border-radius: var(--radius-md);
+  padding: var(--gap-dense);
+  display: flex;
+  flex-direction: column;
+  gap: var(--gap-compact);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.5);
+}
+
+/* react-colorful overrides */
+.es-color-picker__popover .react-colorful {
+  width: 220px;
+  height: auto;
+}
+
+.es-color-picker__popover .react-colorful__saturation {
+  height: 180px;
+  border-radius: var(--radius-sm);
+}
+
+.es-color-picker__popover .react-colorful__hue {
+  height: 14px;
+  border-radius: var(--radius-xs);
+}
+
+.es-color-picker__popover .react-colorful__pointer {
+  width: 20px;
+  height: 20px;
+  border-width: 2px;
+}
+
+/* ── Popover value readout ──────────────────────────────────────────── */
+
+.es-color-picker__popover-value {
+  font: var(--typography-100-regular-mono);
+  color: var(--color-neutral-400);
+  text-align: center;
+  user-select: all;
+}

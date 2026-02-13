@@ -1,0 +1,28 @@
+/* ── Remove Button ───────────────────────────────────────────────── */
+
+.es-remove-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 2rem;
+  height: 2rem;
+  padding: .25rem;
+  border: none;
+  border-radius: var(--radius-sm);
+  background: transparent;
+  color: var(--color-neutral-500);
+  cursor: pointer;
+  transition:
+    color var(--motion-duration-fast) var(--motion-easing-standard),
+    background var(--motion-duration-fast) var(--motion-easing-standard);
+}
+
+.es-remove-btn:hover {
+  color: var(--color-red-600);
+  background: var(--color-red-100);
+}
+
+.es-remove-btn__icon {
+  width: 60%;
+  height: 60%;
+}
