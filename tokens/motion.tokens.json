@@ -1,0 +1,7 @@
+{
+  "motion": {
+    "duration-fast":     { "$value": ".125s", "$type": "other" },
+    "duration-standard": { "$value": ".25s",  "$type": "other" },
+    "easing-standard":   { "$value": "cubic-bezier(0.4, 0.0, 0.2, 1)", "$type": "other" }
+  }
+}

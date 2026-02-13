@@ -1,0 +1,129 @@
+/* ── Reset ─────────────────────────────────────────────────────────── */
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: Inter, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  background: var(--color-neutral-100);
+  color: var(--color-neutral-800);
+}
+
+/* ── Nav ──────────────────────────────────────────────────────────── */
+
+.es-nav {
+  display: flex;
+  align-items: center;
+  gap: var(--gap-dense);
+  padding: var(--inset-normal) var(--inset-spacious);
+  background: var(--color-neutral-0);
+  border-bottom: var(--border-subtle-shorthand);
+}
+
+.es-nav__title {
+  font: 700 1rem/1.5rem Inter, sans-serif;
+  color: var(--color-neutral-800);
+  margin: 0;
+  margin-right: auto;
+}
+
+.es-nav__tab {
+  padding: var(--inset-compact) var(--inset-normal);
+  font: var(--typography-200-bold);
+  border: var(--border-default-width) solid transparent;
+  border-radius: var(--radius-sm);
+  background: transparent;
+  color: var(--color-neutral-600);
+  cursor: pointer;
+  transition:
+    background var(--motion-duration-fast) var(--motion-easing-standard),
+    color var(--motion-duration-fast) var(--motion-easing-standard),
+    border-color var(--motion-duration-fast) var(--motion-easing-standard);
+}
+
+.es-nav__tab:hover {
+  background: var(--color-neutral-100);
+  color: var(--color-neutral-800);
+}
+
+.es-nav__tab[aria-selected='true'] {
+  background: var(--color-union-100);
+  border-color: var(--color-union-300);
+  color: var(--color-union-700);
+}
+
+/* ── Title replacements ───────────────────────────────────────────── */
+
+.es-title {
+  margin: 0;
+  color: var(--color-neutral-800);
+}
+
+.es-title--lg {
+  font: 700 1.802rem/2rem Inter, sans-serif;
+}
+
+.es-title--sm {
+  font: 600 0.889rem/1.5rem Inter, sans-serif;
+}
+
+/* ── Label replacement ────────────────────────────────────────────── */
+
+.es-label {
+  font: var(--typography-200-bold);
+  color: var(--color-neutral-800);
+  display: block;
+}
+
+/* ── Button replacements ──────────────────────────────────────────── */
+
+.es-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--button-spacing-sm-y) var(--button-spacing-sm-x);
+  font: var(--button-typography-sm);
+  border-radius: var(--button-radius-sm);
+  border: var(--border-default-width) solid transparent;
+  cursor: pointer;
+  white-space: nowrap;
+  transition:
+    background var(--motion-duration-fast) var(--motion-easing-standard),
+    color var(--motion-duration-fast) var(--motion-easing-standard),
+    border-color var(--motion-duration-fast) var(--motion-easing-standard);
+}
+
+.es-btn--ghost {
+  background: transparent;
+  border-color: var(--color-neutral-300);
+  color: var(--color-neutral-700);
+}
+
+.es-btn--ghost:hover {
+  background: var(--color-neutral-100);
+  color: var(--color-neutral-800);
+}
+
+.es-btn--primary {
+  background: var(--color-union-500);
+  color: var(--color-neutral-0);
+}
+
+.es-btn--primary:hover {
+  background: var(--color-union-600);
+}
+
+.es-btn--positive {
+  background: var(--color-green-500);
+  color: var(--color-neutral-0);
+}
+
+.es-btn--positive:hover {
+  background: var(--color-green-600);
+}

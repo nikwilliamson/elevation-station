@@ -1,0 +1,548 @@
+.uds-shadow-palette-generator {
+  --spg-gap: var(--gap-normal);
+  --spg-padding: var(--inset-spacious);
+  --spg-card-radius: var(--radius-md);
+  --spg-card-bg: var(--color-neutral-0);
+  --spg-card-border: var(--border-subtle-shorthand);
+  --spg-preview-size: 120px;
+  --spg-swatch-size: var(--dimension-800);
+
+  background-color: var(--color-neutral-100);
+  padding: var(--spg-padding);
+  display: flex;
+  flex-direction: column;
+  gap: var(--gap-spacious);
+}
+
+/* ── Header ──────────────────────────────────────────────────────────── */
+
+.uds-shadow-palette-generator__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+/* ── Engine Reference Table ──────────────────────────────────────────── */
+
+.uds-shadow-palette-generator__reference {
+  background: var(--spg-card-bg);
+  border: var(--spg-card-border);
+  border-radius: var(--spg-card-radius);
+  padding: var(--spg-padding);
+  overflow-x: auto;
+}
+
+.uds-shadow-palette-generator__reference-table {
+  width: 100%;
+  border-collapse: collapse;
+  font: var(--typography-200-regular);
+  color: var(--color-neutral-700);
+}
+
+.uds-shadow-palette-generator__reference-table th,
+.uds-shadow-palette-generator__reference-table td {
+  padding: var(--inset-compact) var(--inset-normal);
+  text-align: left;
+  border-bottom: var(--spg-card-border);
+}
+
+.uds-shadow-palette-generator__reference-table thead th {
+  font: var(--typography-200-bold);
+  color: var(--color-neutral-800);
+}
+
+.uds-shadow-palette-generator__reference-table tbody th {
+  font: var(--typography-200-bold);
+  color: var(--color-neutral-600);
+  white-space: nowrap;
+}
+
+.uds-shadow-palette-generator__reference-table tbody tr:last-child th,
+.uds-shadow-palette-generator__reference-table tbody tr:last-child td {
+  border-bottom: none;
+}
+
+/* ── 5-item controls grid ────────────────────────────────────────────── */
+
+.uds-shadow-palette-generator__controls-grid {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: var(--gap-spacious);
+}
+
+.uds-shadow-palette-generator__controls-grid-cell {
+  display: flex;
+  flex-direction: column;
+  gap: var(--gap-compact);
+  min-width: 0;
+  align-self: start;
+}
+
+/* ── Engine controls panel ───────────────────────────────────────────── */
+
+.uds-shadow-palette-generator__engine-panel {
+  display: flex;
+  flex-direction: column;
+  gap: var(--gap-normal);
+  background: var(--color-neutral-0);
+  border: var(--border-default-width) solid var(--color-neutral-200);
+  border-radius: var(--radius-sm);
+  padding: var(--inset-normal);
+}
+
+/* ── Field description (below labels, matches curve-cell-description) ── */
+
+.uds-shadow-palette-generator__field-description {
+  font: var(--typography-100-regular);
+  color: var(--color-neutral-500);
+  margin: 0;
+  line-height: 1.4;
+}
+
+/* ── Light Position Pad ──────────────────────────────────────────────── */
+
+.uds-shadow-palette-generator__light-pad-wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: var(--gap-compact);
+}
+
+.uds-shadow-palette-generator__light-pad {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 1;
+  border-radius: var(--radius-sm);
+  background:
+    repeating-linear-gradient(to right,
+      var(--color-neutral-200) 0 var(--border-default-width),
+      transparent var(--border-default-width) 25%),
+    repeating-linear-gradient(to bottom,
+      var(--color-neutral-200) 0 var(--border-default-width),
+      transparent var(--border-default-width) 25%),
+    var(--color-neutral-0);
+  border: var(--border-default-width) solid var(--color-neutral-200);
+  overflow: hidden;
+  user-select: none;
+}
+
+.uds-shadow-palette-generator__light-pad-sun {
+  position: absolute;
+  width: 1rem;
+  height: 1rem;
+  border-radius: 50%;
+  translate: -50% -50%;
+  background: var(--color-neutral-0);
+  border: 2px solid var(--color-gold-500, #e99903);
+  pointer-events: none;
+  transition: box-shadow var(--motion-duration-fast) var(--motion-easing-standard);
+}
+
+.uds-shadow-palette-generator__light-pad-sun[data-active] {
+  box-shadow: 0 0 0 7px hsl(44deg 97% 47% / 15%);
+}
+
+.uds-shadow-palette-generator__color-row {
+  display: flex;
+  align-items: center;
+  gap: var(--gap-normal);
+}
+
+.uds-shadow-palette-generator__color-select {
+  flex: 1;
+  min-width: 0;
+  font: var(--typography-200-regular);
+  padding: var(--inset-compact) var(--inset-normal);
+  border: var(--border-default-width) solid var(--color-neutral-300);
+  border-radius: var(--radius-sm);
+  background: var(--color-neutral-0);
+  color: var(--color-neutral-800);
+  cursor: pointer;
+}
+
+.uds-shadow-palette-generator__color-swatch {
+  width: var(--spg-swatch-size);
+  height: var(--spg-swatch-size);
+  border-radius: var(--radius-sm);
+  border: var(--spg-card-border);
+  flex-shrink: 0;
+}
+
+/* ── Elevation levels (4-column grid) ────────────────────────────────── */
+
+.uds-shadow-palette-generator__levels {
+  display: grid;
+  grid-template-columns: repeat(8, 1fr);
+  gap: var(--gap-normal);
+}
+
+/* ── Previews section (sidebar + grid) ────────────────────────────── */
+
+.uds-shadow-palette-generator__previews-section {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: var(--gap-spacious);
+  align-items: start;
+}
+
+.uds-shadow-palette-generator__previews-section > :last-child {
+  grid-column: 2 / -1;
+}
+
+.uds-shadow-palette-generator__preview-panel {
+  display: flex;
+  flex-direction: column;
+  gap: var(--gap-normal);
+  background: var(--spg-card-bg);
+  border: var(--spg-card-border);
+  border-radius: var(--spg-card-radius);
+  padding: var(--spg-padding);
+}
+
+/* ── Elevation card ──────────────────────────────────────────────────── */
+
+.uds-shadow-palette-generator__elevation-card {
+  display: flex;
+  flex-direction: column;
+  gap: var(--gap-normal);
+  background: var(--spg-card-bg);
+  border: var(--spg-card-border);
+  border-radius: var(--spg-card-radius);
+  padding: var(--inset-open);
+}
+
+.uds-shadow-palette-generator__elevation-info {
+  display: flex;
+  flex-direction: column;
+  gap: var(--gap-compact);
+}
+
+.uds-shadow-palette-generator__elevation-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.uds-shadow-palette-generator__elevation-name {
+  font: var(--typography-200-bold);
+  color: var(--color-neutral-800);
+}
+
+.uds-shadow-palette-generator__elevation-remove {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: var(--dimension-500);
+  height: var(--dimension-500);
+  padding: 0;
+  border: none;
+  border-radius: var(--radius-sm);
+  background: transparent;
+  color: var(--color-neutral-400);
+  font-size: 16px;
+  line-height: 1;
+  cursor: pointer;
+  transition: color var(--motion-duration-fast) var(--motion-easing-standard),
+    background var(--motion-duration-fast) var(--motion-easing-standard);
+}
+
+.uds-shadow-palette-generator__elevation-remove:hover {
+  color: var(--color-red-600);
+  background: var(--color-red-100);
+}
+
+.uds-shadow-palette-generator__elevation-depth {
+  font: var(--typography-200-regular-mono);
+  color: var(--color-neutral-600);
+}
+
+/* ── Add elevation button ────────────────────────────────────────────── */
+
+.uds-shadow-palette-generator__add-elevation {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100px;
+  border: var(--border-default-width) dashed var(--color-neutral-300);
+  border-radius: var(--spg-card-radius);
+  background: transparent;
+  color: var(--color-neutral-500);
+  font: var(--typography-200-bold);
+  cursor: pointer;
+  transition: color var(--motion-duration-fast) var(--motion-easing-standard),
+    border-color var(--motion-duration-fast) var(--motion-easing-standard),
+    background var(--motion-duration-fast) var(--motion-easing-standard);
+}
+
+.uds-shadow-palette-generator__add-elevation:hover {
+  color: var(--color-union-600);
+  border-color: var(--color-union-400);
+  background: var(--color-union-100);
+}
+
+.uds-shadow-palette-generator__preview-surface {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--gap-normal);
+  padding: var(--inset-spacious);
+  border-radius: var(--spg-card-radius);
+  transition: background-color var(--motion-duration-standard) var(--motion-easing-standard);
+}
+
+.uds-shadow-palette-generator__preview-card {
+  width: 100%;
+  aspect-ratio: 1;
+  border-radius: var(--spg-card-radius);
+  background: var(--spg-card-bg);
+  transition: box-shadow var(--motion-duration-standard) var(--motion-easing-standard);
+}
+
+/* ── Control slider ──────────────────────────────────────────────────── */
+
+.uds-shadow-palette-generator__slider-group {
+  display: flex;
+  flex-direction: column;
+  gap: var(--gap-compact);
+}
+
+.uds-shadow-palette-generator__slider-row {
+  display: flex;
+  align-items: center;
+  gap: var(--gap-normal);
+}
+
+.uds-shadow-palette-generator__slider {
+  --input-slider-height: var(--dimension-500);
+  --input-track-height: var(--dimension-300);
+
+  -webkit-appearance: none;
+  appearance: none;
+  width: 100%;
+  height: var(--input-slider-height);
+  border-radius: var(--radius-lg);
+  background: transparent;
+  outline: none;
+  flex: 1;
+  min-width: 0;
+}
+
+.uds-shadow-palette-generator__slider::-webkit-slider-runnable-track {
+  background: var(--color-neutral-200);
+  border-radius: var(--radius-lg);
+  height: var(--input-track-height);
+}
+
+.uds-shadow-palette-generator__slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: var(--dimension-300);
+  height: var(--input-slider-height);
+  border-radius: var(--radius-xs);
+  background: var(--color-union-500);
+  margin-top: calc(var(--input-track-height) / 2 * -1);
+  cursor: pointer;
+}
+
+.uds-shadow-palette-generator__slider::-moz-range-track {
+  background: var(--color-neutral-200);
+  border-radius: var(--radius-lg);
+  height: var(--input-track-height);
+}
+
+.uds-shadow-palette-generator__slider::-moz-range-thumb {
+  width: var(--dimension-300);
+  height: var(--input-slider-height);
+  border-radius: var(--radius-xs);
+  background: var(--color-union-500);
+  border: none;
+  cursor: pointer;
+}
+
+.uds-shadow-palette-generator__slider:focus-visible::-webkit-slider-thumb {
+  box-shadow: 0 0 0 2px var(--color-union-500);
+}
+
+.uds-shadow-palette-generator__slider-value {
+  font: var(--typography-200-regular-mono);
+  color: var(--color-neutral-600);
+  text-align: end;
+  min-width: 3.5ch;
+}
+
+/* ── Output section ──────────────────────────────────────────────────── */
+
+.uds-shadow-palette-generator__output {
+  display: flex;
+  flex-direction: column;
+  gap: var(--gap-normal);
+}
+
+.uds-shadow-palette-generator__output-header {
+  display: flex;
+  align-items: center;
+  gap: var(--gap-normal);
+}
+
+.uds-shadow-palette-generator__output-toggle {
+  display: flex;
+  gap: var(--gap-compact);
+}
+
+.uds-shadow-palette-generator__toggle-btn {
+  padding: var(--inset-compact) var(--inset-normal);
+  font: var(--typography-200-bold);
+  border: var(--border-default-width) solid var(--color-neutral-300);
+  border-radius: var(--radius-sm);
+  background: var(--color-neutral-0);
+  color: var(--color-neutral-700);
+  cursor: pointer;
+  transition: background var(--motion-duration-fast) var(--motion-easing-standard),
+    color var(--motion-duration-fast) var(--motion-easing-standard);
+}
+
+.uds-shadow-palette-generator__toggle-btn[aria-pressed='true'] {
+  background: var(--color-union-500);
+  border-color: var(--color-union-500);
+  color: var(--color-neutral-0);
+}
+
+.uds-shadow-palette-generator__output-code {
+  background: var(--color-neutral-0);
+  border: var(--spg-card-border);
+  border-radius: var(--spg-card-radius);
+  padding: var(--spg-padding);
+  overflow-x: auto;
+  max-height: 400px;
+  overflow-y: auto;
+}
+
+.uds-shadow-palette-generator__output-code pre {
+  margin: 0;
+  font: var(--typography-200-regular-mono);
+  color: var(--color-neutral-800);
+  white-space: pre;
+}
+
+.uds-shadow-palette-generator__copy-row {
+  display: flex;
+  justify-content: flex-end;
+}
+
+/* ── Curve cell description ────────────────────────────────────────── */
+
+.uds-shadow-palette-generator__curve-cell-description {
+  font: var(--typography-100-regular);
+  color: var(--color-neutral-500);
+  margin: 0;
+  line-height: 1.4;
+}
+
+/* ── Bezier Curve Editor ──────────────────────────────────────────── */
+
+.uds-bezier-editor {
+  display: flex;
+  flex-direction: column;
+  gap: var(--gap-compact);
+}
+
+.uds-bezier-editor__presets {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+}
+
+.uds-bezier-editor__preset-btn {
+  padding: 3px 8px;
+  font: var(--typography-100-regular);
+  border: var(--border-default-width) solid var(--color-neutral-300);
+  border-radius: var(--radius-sm);
+  background: var(--color-neutral-0);
+  color: var(--color-neutral-600);
+  cursor: pointer;
+  transition:
+    background var(--motion-duration-fast) var(--motion-easing-standard),
+    color var(--motion-duration-fast) var(--motion-easing-standard),
+    border-color var(--motion-duration-fast) var(--motion-easing-standard);
+}
+
+.uds-bezier-editor__preset-btn:hover {
+  background: var(--color-neutral-100);
+  color: var(--color-neutral-800);
+}
+
+.uds-bezier-editor__preset-btn[aria-pressed='true'] {
+  background: var(--color-union-500);
+  border-color: var(--color-union-500);
+  color: var(--color-neutral-0);
+}
+
+.uds-bezier-editor__canvas {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 1;
+  background: var(--color-neutral-0);
+  border: var(--border-default-width) solid var(--color-neutral-200);
+  border-radius: var(--radius-sm);
+  overflow: hidden;
+}
+
+.uds-bezier-editor__grid {
+  position: absolute;
+  inset: 0;
+  background:
+    repeating-linear-gradient(to right,
+      var(--color-neutral-200) 0 var(--border-default-width),
+      transparent var(--border-default-width) 25%),
+    repeating-linear-gradient(to bottom,
+      var(--color-neutral-200) 0 var(--border-default-width),
+      transparent var(--border-default-width) 25%);
+  pointer-events: none;
+}
+
+.uds-bezier-editor__svg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  user-select: none;
+  pointer-events: none;
+}
+
+.uds-bezier-editor__point {
+  position: absolute;
+  width: 1rem;
+  height: 1rem;
+  translate: -50% -50%;
+  z-index: 1;
+  cursor: grab;
+  border-radius: 50%;
+  background: var(--color-neutral-0);
+  border: 2px solid currentColor;
+  transition: box-shadow var(--motion-duration-fast) var(--motion-easing-standard);
+}
+
+.uds-bezier-editor__point[data-active] {
+  box-shadow: 0 0 0 7px color-mix(in srgb, currentColor 10%, transparent);
+}
+
+.uds-bezier-editor__footer {
+  display: flex;
+  flex-direction: column;
+  gap: var(--gap-compact);
+}
+
+.uds-bezier-editor__coords {
+  display: flex;
+  justify-content: space-between;
+  gap: var(--gap-normal);
+}
+
+.uds-bezier-editor__coord {
+  font: var(--typography-100-regular-mono);
+  color: var(--color-neutral-500);
+  transition: color var(--motion-duration-fast) var(--motion-easing-standard);
+}
+
+.uds-bezier-editor__coord[data-active] {
+  color: var(--color-union-600);
+}

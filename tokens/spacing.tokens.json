@@ -1,0 +1,15 @@
+{
+  "gap": {
+    "compact":  { "$value": "0.375rem", "$type": "dimension" },
+    "dense":    { "$value": "0.5rem",   "$type": "dimension" },
+    "normal":   { "$value": "1rem",     "$type": "dimension" },
+    "spacious": { "$value": "3rem",     "$type": "dimension" }
+  },
+  "inset": {
+    "compact":  { "$value": "0.375rem", "$type": "dimension" },
+    "normal":   { "$value": "1rem",     "$type": "dimension" },
+    "open":     { "$value": "2rem",     "$type": "dimension" },
+    "spacious": { "$value": "3rem",     "$type": "dimension" },
+    "generous": { "$value": "4rem",     "$type": "dimension" }
+  }
+}

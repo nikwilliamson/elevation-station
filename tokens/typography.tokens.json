@@ -1,0 +1,23 @@
+{
+  "typography": {
+    "100-regular":       { "$value": "400 0.6243rem/1rem Inter, sans-serif",        "$type": "other" },
+    "100-regular-mono":  { "$value": "400 0.6243rem/1rem IBM Plex Mono, monospace",  "$type": "other" },
+    "200-regular":       { "$value": "400 0.7023rem/1rem Inter, sans-serif",        "$type": "other" },
+    "200-regular-mono":  { "$value": "400 0.7023rem/1rem IBM Plex Mono, monospace",  "$type": "other" },
+    "200-bold":          { "$value": "700 0.7023rem/1rem Inter, sans-serif",        "$type": "other" }
+  },
+  "button": {
+    "spacing-sm-x":   { "$value": "0.75rem",  "$type": "dimension" },
+    "spacing-sm-y":   { "$value": "0.5rem",   "$type": "dimension" },
+    "spacing-md-x":   { "$value": "1rem",     "$type": "dimension" },
+    "spacing-md-y":   { "$value": "0.75rem",  "$type": "dimension" },
+    "typography-sm":   { "$value": "600 0.8889rem/1.5rem Inter, sans-serif", "$type": "other" },
+    "typography-md":   { "$value": "600 0.8889rem/1.5rem Inter, sans-serif", "$type": "other" },
+    "radius-sm":       { "$value": "0.5rem",   "$type": "dimension" },
+    "radius-md":       { "$value": "0.75rem",  "$type": "dimension" }
+  },
+  "letter-spacing": {
+    "500": { "$value": "0",       "$type": "other" },
+    "700": { "$value": "0.05em",  "$type": "other" }
+  }
+}

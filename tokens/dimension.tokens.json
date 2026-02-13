@@ -1,0 +1,7 @@
+{
+  "dimension": {
+    "300": { "$value": "0.5rem",  "$type": "dimension" },
+    "500": { "$value": "1rem",    "$type": "dimension" },
+    "800": { "$value": "2.5rem",  "$type": "dimension" }
+  }
+}

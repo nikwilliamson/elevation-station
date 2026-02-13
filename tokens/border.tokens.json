@@ -1,0 +1,6 @@
+{
+  "border": {
+    "default-width":     { "$value": "0.5px", "$type": "dimension" },
+    "subtle-shorthand":  { "$value": "0.5px solid #e9edf4", "$type": "other" }
+  }
+}

@@ -1,0 +1,37 @@
+{
+  "color": {
+    "neutral": {
+      "0":   { "$value": "#ffffff", "$type": "color" },
+      "100": { "$value": "#f8f8fa", "$type": "color" },
+      "200": { "$value": "#e9edf4", "$type": "color" },
+      "300": { "$value": "#cbd3df", "$type": "color" },
+      "400": { "$value": "#a3adbd", "$type": "color" },
+      "500": { "$value": "#848ea0", "$type": "color" },
+      "600": { "$value": "#5c687b", "$type": "color" },
+      "700": { "$value": "#2d3a4e", "$type": "color" },
+      "800": { "$value": "#0d182c", "$type": "color" }
+    },
+    "union": {
+      "100": { "$value": "#f4f8ff", "$type": "color" },
+      "200": { "$value": "#ddeaff", "$type": "color" },
+      "300": { "$value": "#88b3fb", "$type": "color" },
+      "400": { "$value": "#468bff", "$type": "color" },
+      "500": { "$value": "#126bf9", "$type": "color" },
+      "600": { "$value": "#014ebf", "$type": "color" },
+      "700": { "$value": "#033480", "$type": "color" },
+      "800": { "$value": "#061530", "$type": "color" }
+    },
+    "red": {
+      "100": { "$value": "#fff5f4", "$type": "color" },
+      "600": { "$value": "#a82a21", "$type": "color" }
+    },
+    "gold": {
+      "500": { "$value": "#e99903", "$type": "color" }
+    },
+    "green": {
+      "500": { "$value": "#4fd35e", "$type": "color" },
+      "600": { "$value": "#218431", "$type": "color" },
+      "800": { "$value": "#081e08", "$type": "color" }
+    }
+  }
+}
