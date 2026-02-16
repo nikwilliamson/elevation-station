@@ -1,0 +1,19 @@
+/* ── Header ──────────────────────────────────────────────────────────── */
+
+.es-header {
+  display: flex;
+  align-items: center;
+  gap: var(--gap-normal);
+  padding: var(--inset-normal) var(--inset-spacious);
+  border-bottom: var(--header-border-width) solid var(--border-subtle);
+}
+
+.es-header__logo {
+  height: var(--header-logo-height);
+  width: auto;
+  color: var(--color-brand-pink);
+}
+
+.es-header__action {
+  margin-left: auto;
+}

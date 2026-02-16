@@ -1,0 +1,54 @@
+{
+  "color": {
+    "brand": {
+      "black": { "$value": "oklch(100% 0 135.24)" },
+      "white": { "$value": "oklch(19.27% 0.0747 292.99)" }
+    },
+    "neutral": {
+      "200": { "$value": "oklch(25% 0.066 292.99)" },
+      "300": { "$value": "oklch(31.5% 0.06 292.99)" },
+      "400": { "$value": "oklch(56.5% 0.048 293)" },
+      "500": { "$value": "oklch(70.5% 0.042 293)" },
+      "600": { "$value": "oklch(82% 0.038 293)" },
+      "700": { "$value": "oklch(88.5% 0.036 293)" },
+      "800": { "$value": "oklch(90.5% 0.032 293)" },
+      "900": { "$value": "#ffffff" }
+    },
+    "pink": {
+      "900": { "$value": "oklch(90.5% 0.048 330.4)" }
+    }
+  },
+  "surface": {
+    "primary":  { "$value": "oklch(100% 0 135.24)" },
+    "raised":   { "$value": "{color.neutral.0}" },
+    "sunken":   { "$value": "oklch(90.5% 0.032 293)" },
+    "overlay":  { "$value": "{color.neutral.0}" },
+    "white":    { "$value": "{color.neutral.0}" }
+  },
+  "text": {
+    "primary":   { "$value": "oklch(19.27% 0.0747 292.99)" },
+    "secondary": { "$value": "oklch(25% 0.066 292.99)" },
+    "tertiary":  { "$value": "oklch(56.5% 0.048 293)" },
+    "inverse":   { "$value": "{color.neutral.0}" },
+    "on-bold":   { "$value": "{color.neutral.0}" }
+  },
+  "border": {
+    "subtle":  { "$value": "oklch(88.5% 0.036 293)" },
+    "default": { "$value": "oklch(82% 0.038 293)" },
+    "strong":  { "$value": "oklch(70.5% 0.042 293)" }
+  },
+  "interactive": {
+    "default": { "$value": "{color.neutral.0}" },
+    "hover":   { "$value": "oklch(90.5% 0.032 293)" },
+    "active":  { "$value": "oklch(82% 0.038 293)" }
+  },
+  "shadow": {
+    "color":   { "$value": "rgba(0, 0, 0, 0.12)" },
+    "popover": { "$value": "0 8px 24px rgba(0, 0, 0, 0.12)" }
+  },
+  "selection": {
+    "bg":   { "$value": "{color.brand.yellow}" },
+    "text": { "$value": "{color.brand.white}" }
+  },
+  "border-subtle-shorthand": { "$value": "0.5px solid oklch(88.5% 0.036 293)" }
+}

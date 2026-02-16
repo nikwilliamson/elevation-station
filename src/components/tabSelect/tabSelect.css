@@ -1,0 +1,130 @@
+/* ── Tab Select ──────────────────────────────────────────────────────── */
+
+.es-tab-select {
+  background: var(--surface-sunken);
+  border-radius: var(--radius-md);
+  border: var(--border-default-width) solid var(--border-subtle);
+  padding: var(--tab-select-padding);
+}
+
+.es-tab-select__list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--tab-select-gap);
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.es-tab-select__item {
+  display: grid;
+}
+
+.es-tab-select__item > * {
+  grid-area: 1 / 1;
+}
+
+.es-tab-select__indicator {
+  z-index: 1;
+  border-radius: var(--radius-sm);
+  background: var(--color-brand-blue);
+}
+
+.es-tab-select__btn {
+  z-index: 2;
+  color: var(--text-tertiary);
+  background: transparent;
+  border: none;
+  border-radius: var(--radius-sm);
+  white-space: nowrap;
+  cursor: pointer;
+  transition: color var(--motion-duration-fast) var(--motion-easing-standard);
+}
+
+/* ── Sizes ───────────────────────────────────────────────────────────── */
+
+.es-tab-select--sm .es-tab-select__btn {
+  padding: var(--tab-select-sm-padding-y) var(--tab-select-sm-padding-x);
+  font-size: var(--text-size-80);
+  font-weight: 600;
+  line-height: 1;
+}
+
+.es-tab-select--md .es-tab-select__btn {
+  padding: var(--inset-compact) var(--inset-normal);
+  font: var(--typography-200-bold);
+}
+
+.es-tab-select--lg .es-tab-select__btn {
+  padding: var(--inset-compact) var(--inset-normal);
+  font: var(--typography-300-bold);
+}
+
+.es-tab-select__btn:hover {
+  color: var(--text-secondary);
+}
+
+.es-tab-select__btn[aria-selected='true'] {
+  color: var(--text-on-bold);
+}
+
+/* ── Loose (non-contained) variant ───────────────────────────────────── */
+
+.es-tab-select--loose {
+  background: none;
+  border: none;
+  padding: 0;
+  border-radius: 0;
+}
+
+.es-tab-select--loose .es-tab-select__list {
+  gap: var(--gap-compact);
+}
+
+.es-tab-select--loose .es-tab-select__btn {
+  border: var(--border-default-width) solid var(--border-default);
+}
+
+.es-tab-select--loose .es-tab-select__btn[aria-selected='true'] {
+  border-color: transparent;
+}
+
+/* ── Border (underline) variant ────────────────────────────────────── */
+
+.es-tab-select--border {
+  background: none;
+  border: none;
+  border-bottom: var(--tab-select-border-variant-width) solid var(--border-subtle);
+  border-radius: 0;
+  padding: 0;
+}
+
+.es-tab-select--border.es-tab-select--sm .es-tab-select__list {
+  gap: calc(var(--tab-select-sm-padding-x) * 2 + var(--tab-select-gap));
+}
+
+.es-tab-select--border.es-tab-select--md .es-tab-select__list {
+  gap: calc(var(--inset-normal) * 2 + var(--tab-select-gap));
+}
+
+.es-tab-select--border.es-tab-select--lg .es-tab-select__list {
+  gap: calc(var(--inset-normal) * 2 + var(--tab-select-gap));
+}
+
+.es-tab-select--border .es-tab-select__item {
+  align-items: end;
+}
+
+.es-tab-select--border .es-tab-select__indicator {
+  border-radius: 0;
+  background: var(--color-brand-yellow);
+  height: var(--tab-select-border-indicator-height);
+  align-self: end;
+  margin-bottom: calc(-1 * var(--tab-select-border-indicator-height));
+}
+
+.es-tab-select--border .es-tab-select__btn {
+  border-radius: 0;
+  padding-left: 0;
+  padding-right: 0;
+}

@@ -1,0 +1,7 @@
+/* ── Divider ─────────────────────────────────────────────────────────── */
+
+.es-divider {
+  border: none;
+  border-top: var(--border-subtle-shorthand);
+  margin: 0;
+}

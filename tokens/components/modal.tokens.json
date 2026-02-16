@@ -1,0 +1,8 @@
+{
+  "modal": {
+    "padding":   { "$value": "{inset.normal}", "$type": "dimension" },
+    "radius":    { "$value": "{radius.lg}",    "$type": "dimension" },
+    "min-width": { "$value": "320px",          "$type": "dimension" },
+    "z-index":   { "$value": "1000" }
+  }
+}

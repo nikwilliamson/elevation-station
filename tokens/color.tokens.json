@@ -60,5 +60,44 @@
       "500": { "$value": "#4fd35e", "$type": "color" },
       "600": { "$value": "#218431", "$type": "color" }
     }
+  },
+  "surface": {
+    "primary":   { "$value": "{color.brand.black}" },
+    "raised":    { "$value": "{color.neutral.800}" },
+    "sunken":    { "$value": "{color.neutral.900}" },
+    "overlay":   { "$value": "{color.neutral.900}" },
+    "white":     { "$value": "{color.neutral.0}" }
+  },
+  "text": {
+    "primary":   { "$value": "{color.brand.white}" },
+    "secondary": { "$value": "{color.neutral.200}" },
+    "tertiary":  { "$value": "{color.neutral.400}" },
+    "inverse":   { "$value": "{color.neutral.900}" },
+    "on-bold":   { "$value": "{color.neutral.0}" }
+  },
+  "border": {
+    "subtle":    { "$value": "{color.neutral.700}" },
+    "default":   { "$value": "{color.neutral.600}" },
+    "strong":    { "$value": "{color.neutral.500}" }
+  },
+  "interactive": {
+    "default":   { "$value": "{color.neutral.800}" },
+    "hover":     { "$value": "{color.neutral.700}" },
+    "active":    { "$value": "{color.neutral.600}" }
+  },
+  "focus": {
+    "ring-width":  { "$value": "2px" },
+    "ring-offset": { "$value": "2px" }
+  },
+  "disabled": {
+    "opacity": { "$value": "0.4" }
+  },
+  "shadow": {
+    "color":   { "$value": "rgba(0, 0, 0, 0.5)" },
+    "popover": { "$value": "0 8px 24px rgba(0, 0, 0, 0.5)" }
+  },
+  "selection": {
+    "bg":    { "$value": "{color.brand.pink}" },
+    "text":  { "$value": "{color.brand.white}" }
   }
 }

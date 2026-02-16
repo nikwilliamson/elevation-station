@@ -1,0 +1,113 @@
+/* ── State Panel ─────────────────────────────────────────────────────── */
+
+.es-interaction-designer__state-panel {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sid-gap);
+  background: var(--sid-card-bg);
+  border: var(--sid-card-border);
+  border-radius: var(--sid-card-radius);
+  padding: var(--sid-padding);
+}
+
+.es-interaction-designer__state-panel-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.es-interaction-designer__state-panel--active {
+  border-color: var(--color-brand-blue);
+  box-shadow: 0 0 0 var(--shadow-interaction-designer-active-ring-width) var(--color-brand-blue);
+}
+
+.es-interaction-designer__state-panel--disabled {
+  opacity: 0.6;
+}
+
+.es-interaction-designer__state-panel--flat {
+  background: none;
+  border: none;
+  border-radius: 0;
+  padding: 0;
+}
+
+/* ── Content reveal animation ─────────────────────────────────────── */
+
+.es-state-panel__content {
+  display: grid;
+  grid-template-rows: 0fr;
+  opacity: 0;
+  transition:
+    grid-template-rows var(--motion-duration-standard) var(--motion-easing-standard),
+    opacity var(--motion-duration-standard) var(--motion-easing-standard);
+}
+
+.es-state-panel__content--open {
+  grid-template-rows: 1fr;
+  opacity: 1;
+}
+
+.es-state-panel__content-inner {
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  gap: var(--sid-gap);
+}
+
+.es-interaction-designer__state-preview {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--inset-spacious);
+  border-radius: var(--radius-sm);
+  transition: background-color var(--motion-duration-standard) var(--motion-easing-standard);
+}
+
+.es-interaction-designer__state-preview-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  box-sizing: border-box;
+  padding: var(--button-spacing-sm-y) var(--button-spacing-sm-x);
+  font: var(--button-typography-sm);
+  letter-spacing: var(--letter-spacing-500);
+  border-radius: var(--button-radius-sm);
+  border: none;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  white-space: nowrap;
+  pointer-events: none;
+  transition: box-shadow var(--motion-duration-standard) var(--motion-easing-standard);
+}
+
+.es-interaction-designer__slider-group {
+  display: flex;
+  flex-direction: column;
+  gap: var(--gap-compact);
+}
+
+/* ── Grouped sub-cards ──────────────────────────────────────────────── */
+
+.es-state-panel__group-column {
+  display: flex;
+  flex-direction: column;
+  gap: var(--gap-compact);
+}
+
+.es-state-panel__group {
+  display: flex;
+  flex-direction: column;
+  gap: var(--gap-compact);
+  background: var(--surface-primary);
+  border: var(--border-subtle-shorthand);
+  border-radius: var(--radius-sm);
+  padding: var(--inset-normal);
+}
+
+
+.es-state-panel__group-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--gap-normal);
+}

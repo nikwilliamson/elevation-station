@@ -1,0 +1,8 @@
+{
+  "shadow-token-designer": {
+    "controls-grid-cell-gap":     { "$value": "{gap.normal}" },
+    "light-pad-sun-size":         { "$value": "1rem" },
+    "light-pad-sun-border":       { "$value": "2px" },
+    "light-pad-sun-glow":         { "$value": "0 0 0 7px hsl(44deg 97% 47% / 15%)" }
+  }
+}

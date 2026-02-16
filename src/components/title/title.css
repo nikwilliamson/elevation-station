@@ -1,0 +1,14 @@
+/* ── Title ─────────────────────────────────────────────────────────── */
+
+.es-title {
+  margin: 0;
+  color: var(--text-primary);
+}
+
+.es-title--lg {
+  font: var(--typography-600-bold);
+}
+
+.es-title--sm {
+  font: var(--typography-500-bold);
+}

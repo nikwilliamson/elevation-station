@@ -1,0 +1,8 @@
+{
+  "control-slider": {
+    "height":            { "$value": "1.5rem" },
+    "track-height":      { "$value": "{dimension.300}" },
+    "value-max-width":   { "$value": "3rem" },
+    "focus-ring-spread": { "$value": "2px" }
+  }
+}

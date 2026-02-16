@@ -6,7 +6,7 @@
   "scripts": {
     "dev": "npm run build:tokens && vite",
     "build": "npm run build:tokens && tsc -b && vite build",
-    "build:tokens": "style-dictionary build --config sd.config.js"
+    "build:tokens": "node sd.config.js"
   },
   "dependencies": {
     "motion": "^12.0.0",
@@ -17,6 +17,7 @@
     "shiki": "^3.22.0"
   },
   "devDependencies": {
+    "@axe-core/react": "^4.11.1",
     "@types/react": "^19.0.0",
     "@types/react-dom": "^19.0.0",
     "@vitejs/plugin-react": "^4.3.0",

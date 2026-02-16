@@ -1,0 +1,76 @@
+/* ── Modal ───────────────────────────────────────────────────────────── */
+
+.es-modal-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: var(--modal-z-index, 1000);
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.es-modal {
+  position: relative;
+  background: var(--surface-overlay);
+  border: var(--border-default-width) solid var(--border-subtle);
+  border-radius: var(--modal-radius, var(--radius-lg));
+  padding: var(--modal-padding, var(--inset-normal));
+  min-width: var(--modal-min-width, 320px);
+  max-width: 96vw;
+  max-height: 96vh;
+  overflow: auto;
+  box-shadow: var(--shadow-popover);
+  display: flex;
+  flex-direction: column;
+  gap: var(--gap-normal);
+  transform-style: preserve-3d;
+}
+
+/* ── Header ──────────────────────────────────────────────────────────── */
+
+.es-modal__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--gap-normal);
+}
+
+.es-modal__title {
+  font: var(--typography-400-semibold);
+  color: var(--text-primary);
+  margin: 0;
+}
+
+.es-modal__close {
+  appearance: none;
+  background: none;
+  border: none;
+  color: var(--text-tertiary);
+  cursor: pointer;
+  padding: var(--inset-tight);
+  border-radius: var(--radius-sm);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: color var(--motion-duration-fast) var(--motion-easing-standard),
+              background var(--motion-duration-fast) var(--motion-easing-standard);
+  flex-shrink: 0;
+}
+
+.es-modal__close:hover {
+  color: var(--text-primary);
+  background: var(--interactive-hover);
+}
+
+.es-modal__close:active {
+  background: var(--interactive-active);
+}
+
+/* ── Body ────────────────────────────────────────────────────────────── */
+
+.es-modal__body {
+  display: flex;
+  flex-direction: column;
+  gap: var(--gap-normal);
+}

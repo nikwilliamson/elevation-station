@@ -1,0 +1,6 @@
+{
+  "scrollbar": {
+    "size":   { "$value": "6px" },
+    "radius": { "$value": "3px" }
+  }
+}

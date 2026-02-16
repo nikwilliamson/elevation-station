@@ -1,0 +1,84 @@
+/* ── Switch ──────────────────────────────────────────────────────── */
+
+.es-switch {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+}
+
+.es-switch--with-label {
+  gap: var(--gap-dense);
+  user-select: none;
+}
+
+.es-switch__label {
+  font: var(--typography-200-bold);
+  color: var(--text-tertiary);
+}
+
+.es-switch__input {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+}
+
+/* ── Size tokens ────────────────────────────────────────────────── */
+
+.es-switch--md {
+  --_switch-track-w: var(--switch-track-width);
+  --_switch-track-h: var(--switch-track-height);
+  --_switch-track-r: var(--switch-track-radius);
+  --_switch-thumb: var(--switch-thumb-size);
+  --_switch-thumb-offset: var(--switch-thumb-offset);
+  --_switch-thumb-travel: var(--switch-thumb-travel);
+}
+
+.es-switch--sm {
+  --_switch-track-w: var(--switch-sm-track-width);
+  --_switch-track-h: var(--switch-sm-track-height);
+  --_switch-track-r: var(--switch-sm-track-radius);
+  --_switch-thumb: var(--switch-sm-thumb-size);
+  --_switch-thumb-offset: var(--switch-sm-thumb-offset);
+  --_switch-thumb-travel: var(--switch-sm-thumb-travel);
+}
+
+/* ── Track ──────────────────────────────────────────────────────── */
+
+.es-switch__track {
+  position: relative;
+  width: var(--_switch-track-w);
+  height: var(--_switch-track-h);
+  border-radius: var(--_switch-track-r);
+  background: var(--border-subtle);
+  transition: background var(--motion-duration-fast) var(--motion-easing-standard);
+}
+
+.es-switch__track::after {
+  content: '';
+  position: absolute;
+  top: var(--_switch-thumb-offset);
+  left: var(--_switch-thumb-offset);
+  width: var(--_switch-thumb);
+  height: var(--_switch-thumb);
+  border-radius: 50%;
+  background: var(--text-tertiary);
+  transition:
+    transform var(--motion-duration-fast) var(--motion-easing-standard),
+    background var(--motion-duration-fast) var(--motion-easing-standard);
+}
+
+.es-switch__input:checked + .es-switch__track {
+  background: var(--color-brand-blue);
+}
+
+.es-switch__input:checked + .es-switch__track::after {
+  transform: translateX(var(--_switch-thumb-travel));
+  background: var(--surface-white);
+}
+
+.es-switch__input:focus-visible + .es-switch__track {
+  outline: var(--switch-focus-ring-width) solid var(--color-brand-blue);
+  outline-offset: var(--switch-focus-ring-offset);
+}

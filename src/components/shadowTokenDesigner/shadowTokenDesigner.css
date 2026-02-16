@@ -1,0 +1,268 @@
+.es-shadow-token-designer {
+  --spg-gap: var(--gap-normal);
+  --spg-padding-y: var(--inset-open);
+  --spg-padding-x: var(--inset-spacious);
+  --spg-card-radius: var(--radius-md);
+  --spg-card-bg: var(--interactive-default);
+  --spg-card-border: var(--border-subtle-shorthand);
+  --spg-preview-size: 120px;
+  background-color: var(--surface-primary);
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  grid-template-rows: 1fr;
+  gap: 0;
+  flex: 1;
+  min-height: 0;
+}
+
+.es-shadow-token-designer[data-resizing] {
+  user-select: none;
+}
+
+.es-shadow-token-designer__main {
+  display: flex;
+  flex-direction: column;
+  gap: var(--gap-spacious);
+  min-width: 0;
+  min-height: 0;
+  overflow-y: auto;
+  scrollbar-gutter: stable;
+  padding: var(--spg-padding-y) var(--spg-padding-x);
+}
+
+/* ── Header ──────────────────────────────────────────────────────────── */
+
+.es-shadow-token-designer__header {
+  display: flex;
+  align-items: center;
+  gap: var(--gap-normal);
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
+
+/* ── 5-item controls grid ────────────────────────────────────────────── */
+
+.es-shadow-token-designer__controls-grid {
+  container-type: inline-size;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, 320px), 1fr));
+  gap: var(--gap-spacious);
+}
+
+.es-shadow-token-designer__controls-grid-cell {
+  display: flex;
+  flex-direction: column;
+  gap: var(--shadow-token-designer-controls-grid-cell-gap);
+  min-width: 0;
+  align-self: start;
+}
+
+/* ── Engine controls panel ───────────────────────────────────────────── */
+
+.es-shadow-token-designer__panel {
+  display: flex;
+  flex-direction: column;
+  gap: var(--gap-normal);
+  background: var(--interactive-default);
+  border: var(--border-default-width) solid var(--border-subtle);
+  border-radius: var(--radius-sm);
+  padding: var(--inset-normal);
+  aspect-ratio: 1;
+}
+
+@container (max-width: 699px) {
+  .es-shadow-token-designer__panel {
+    aspect-ratio: auto;
+  }
+}
+
+/* ── Light Position Pad ──────────────────────────────────────────────── */
+
+.es-shadow-token-designer__light-pad-wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: var(--gap-compact);
+}
+
+.es-shadow-token-designer__light-pad {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 1;
+  border-radius: var(--radius-sm);
+  background:
+    repeating-linear-gradient(to right,
+      transparent 0 calc(25% - var(--border-default-width)),
+      var(--border-subtle) calc(25% - var(--border-default-width)) 25%),
+    repeating-linear-gradient(to bottom,
+      transparent 0 calc(25% - var(--border-default-width)),
+      var(--border-subtle) calc(25% - var(--border-default-width)) 25%),
+    var(--interactive-default);
+  background-size:
+    calc(100% + var(--border-default-width)) calc(100% + var(--border-default-width)),
+    calc(100% + var(--border-default-width)) calc(100% + var(--border-default-width)),
+    auto;
+  border: var(--border-default-width) solid var(--border-subtle);
+  overflow: hidden;
+  user-select: none;
+}
+
+.es-shadow-token-designer__light-pad-sun {
+  position: absolute;
+  width: var(--shadow-token-designer-light-pad-sun-size);
+  height: var(--shadow-token-designer-light-pad-sun-size);
+  border-radius: 50%;
+  translate: -50% -50%;
+  background: var(--color-brand-yellow);
+  border: var(--shadow-token-designer-light-pad-sun-border) solid var(--color-yellow-400);
+  pointer-events: none;
+  transition: box-shadow var(--motion-duration-fast) var(--motion-easing-standard);
+}
+
+.es-shadow-token-designer__light-pad-sun[data-active] {
+  box-shadow: var(--shadow-token-designer-light-pad-sun-glow);
+}
+
+
+/* ── Field groups ────────────────────────────────────────────────────── */
+
+.es-shadow-token-designer__slider-group {
+  display: flex;
+  flex-direction: column;
+  gap: var(--gap-compact);
+}
+
+
+/* ── Bezier Curve Editor ──────────────────────────────────────────── */
+
+.es-bezier-editor {
+  display: flex;
+  flex-direction: column;
+  gap: var(--gap-compact);
+}
+
+.es-bezier-editor__presets {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--bezier-editor-preset-gap);
+}
+
+.es-bezier-editor__preset-btn {
+  padding: var(--bezier-editor-preset-padding-y) var(--bezier-editor-preset-padding-x);
+  font: var(--typography-200-regular);
+  border: var(--border-default-width) solid var(--border-default);
+  border-radius: var(--radius-sm);
+  background: transparent;
+  color: var(--text-secondary);
+  cursor: pointer;
+  transition:
+    background var(--motion-duration-fast) var(--motion-easing-standard),
+    color var(--motion-duration-fast) var(--motion-easing-standard),
+    border-color var(--motion-duration-fast) var(--motion-easing-standard);
+}
+
+.es-bezier-editor__preset-btn:hover {
+  background: var(--interactive-hover);
+  color: var(--text-primary);
+}
+
+.es-bezier-editor__preset-btn[aria-pressed='true'] {
+  background: var(--color-brand-blue);
+  border-color: var(--color-brand-blue);
+  color: var(--text-on-bold);
+}
+
+.es-bezier-editor__canvas {
+  grid-column: 2;
+  grid-row: 1;
+  position: relative;
+  width: 100%;
+  aspect-ratio: 1;
+  background: var(--interactive-default);
+  border: var(--border-default-width) solid var(--border-subtle);
+  border-radius: var(--radius-sm);
+  overflow: hidden;
+}
+
+.es-bezier-editor__grid {
+  position: absolute;
+  inset: 0 calc(var(--border-default-width) * -1) calc(var(--border-default-width) * -1) 0;
+  background:
+    repeating-linear-gradient(to right,
+      transparent 0 calc(25% - var(--border-default-width)),
+      var(--border-subtle) calc(25% - var(--border-default-width)) 25%),
+    repeating-linear-gradient(to bottom,
+      transparent 0 calc(25% - var(--border-default-width)),
+      var(--border-subtle) calc(25% - var(--border-default-width)) 25%);
+  pointer-events: none;
+}
+
+.es-bezier-editor__grid--custom-x {
+  background:
+    repeating-linear-gradient(to bottom,
+      transparent 0 calc(25% - var(--border-default-width)),
+      var(--border-subtle) calc(25% - var(--border-default-width)) 25%);
+}
+
+.es-bezier-editor__chart-area {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  grid-template-rows: 1fr auto;
+  gap: var(--gap-compact);
+}
+
+.es-bezier-editor__canvas-col {
+  display: contents;
+}
+
+.es-bezier-editor__y-axis {
+  grid-column: 1;
+  grid-row: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.es-bezier-editor__y-axis .es-bezier-editor__axis-label {
+  writing-mode: vertical-rl;
+  transform: rotate(180deg);
+}
+
+.es-bezier-editor__x-axis {
+  grid-column: 2;
+  grid-row: 2;
+  display: flex;
+  justify-content: space-between;
+}
+
+.es-bezier-editor__axis-label {
+  font: var(--typography-100-regular-mono);
+  color: var(--text-tertiary);
+  line-height: 1;
+}
+
+.es-bezier-editor__svg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  user-select: none;
+  pointer-events: none;
+}
+
+.es-bezier-editor__point {
+  position: absolute;
+  width: var(--bezier-editor-point-size);
+  height: var(--bezier-editor-point-size);
+  translate: -50% -50%;
+  z-index: 1;
+  cursor: grab;
+  border-radius: 50%;
+  background: var(--interactive-default);
+  border: var(--bezier-editor-point-border) solid currentColor;
+  transition: box-shadow var(--motion-duration-fast) var(--motion-easing-standard);
+}
+
+.es-bezier-editor__point[data-active] {
+  box-shadow: 0 0 0 7px color-mix(in srgb, currentColor 10%, transparent);
+}
+

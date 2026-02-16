@@ -1,0 +1,99 @@
+/* ── Elevation card ──────────────────────────────────────────────────── */
+
+.es-shadow-token-designer__elevation-card {
+  display: flex;
+  flex-direction: var(--elevation-card-direction, column);
+  background: var(--spg-card-bg);
+  border: var(--spg-card-border);
+  border-radius: var(--spg-card-radius);
+  gap: var(--gap-normal);
+}
+
+.es-shadow-token-designer__elevation-content {
+  display: flex;
+  flex-direction: column;
+  gap: var(--gap-compact);
+  padding: var(--elevation-card-padding);
+  flex: var(--elevation-card-content-flex, initial);
+  min-width: var(--elevation-card-content-min-width, initial);
+}
+
+.es-shadow-token-designer__elevation-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--gap-compact);
+}
+
+.es-shadow-token-designer__elevation-name {
+  font: var(--typography-400-semibold);
+  color: var(--text-primary);
+  padding: 0 var(--elevation-card-controls-padding-x);
+}
+
+.es-shadow-token-designer__elevation-actions {
+  display: flex;
+  align-items: center;
+  gap: var(--gap-compact);
+  flex-shrink: 0;
+}
+
+.es-shadow-token-designer__elevation-meta {
+  display: flex;
+  gap: var(--gap-normal);
+  padding: 0 var(--elevation-card-controls-padding-x);
+}
+
+.es-shadow-token-designer__elevation-meta-item {
+  font: var(--typography-200-regular);
+  color: var(--text-tertiary);
+}
+
+.es-shadow-token-designer__elevation-meta-value {
+  font: var(--typography-200-regular-mono);
+  color: var(--text-secondary);
+}
+
+/* ── Preview wrapper + badge ─────────────────────────────────────────── */
+
+.es-shadow-token-designer__elevation-preview-wrap {
+  position: relative;
+}
+
+.es-shadow-token-designer__elevation-badge {
+  position: absolute;
+  top: var(--inset-compact);
+  left: var(--inset-compact);
+  z-index: 1;
+  font: var(--typography-100-regular);
+  color: var(--text-secondary);
+  background: var(--surface-overlay);
+  border: var(--border-default-width) solid var(--border-subtle);
+  border-radius: var(--radius-xs);
+  padding: 0 var(--inset-compact);
+  line-height: 1.6;
+  pointer-events: none;
+}
+
+/* ── Variants ───────────────────────────────────────────────────────── */
+
+.es-shadow-token-designer__elevation-card--grid {
+  --elevation-card-direction: column;
+  --elevation-card-content-flex: initial;
+  --elevation-card-content-min-width: initial;
+}
+
+.es-shadow-token-designer__elevation-card--list {
+  --elevation-card-direction: row;
+  --elevation-card-content-flex: 1;
+  --elevation-card-content-min-width: 0;
+}
+
+.es-shadow-token-designer__elevation-card--list > .es-shadow-token-designer__elevation-preview-wrap {
+  width: var(--elevation-card-list-preview-width);
+  flex-shrink: 0;
+}
+
+.es-shadow-token-designer__elevation-card--list > .es-shadow-token-designer__elevation-preview-wrap > .es-shadow-preview {
+  padding: var(--elevation-card-list-preview-padding);
+}

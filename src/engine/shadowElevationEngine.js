@@ -272,8 +272,8 @@ export function buildShadowStack({ depth, lightX, lightY, intensity, hardness, r
   const cached = _stackCache.get(cacheKey);
   if (cached) return cached;
 
-  // Remap elevation so low elevation isn't "dead"
-  const En = remap01(E, 0.1, 0.85);
+  // Normalized elevation (full 0–1 range)
+  const En = clamp01(E);
 
   // ── Light direction ─────────────────────────────────────────────────────────
   // Ease so near-overhead is subtle, angled is dramatic.

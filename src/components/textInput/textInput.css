@@ -1,0 +1,183 @@
+/* ── TextInput (label + input group) ─────────────────────────── */
+
+.es-text-input {
+  display: flex;
+  flex-direction: column;
+  gap: var(--gap-compact);
+}
+
+/* ── TextInput wrapper ────────────────────────────────────────── */
+
+.es-input-wrap {
+  position: relative;
+  display: inline-flex;
+  width: 100%;
+  transition:
+    background var(--motion-duration-fast) var(--motion-easing-standard);
+}
+
+.es-input-wrap::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  border: var(--border-default-width) solid transparent;
+  pointer-events: none;
+  transition:
+    border-color var(--motion-duration-fast) var(--motion-easing-standard);
+}
+
+/* ── Wrapper sizes (border-radius) ───────────────────────────── */
+
+.es-input-wrap--xs { border-radius: var(--input-radius-xs); }
+.es-input-wrap--sm { border-radius: var(--input-radius-sm); }
+.es-input-wrap--md { border-radius: var(--input-radius-md); }
+.es-input-wrap--lg { border-radius: var(--input-radius-lg); }
+
+/* ── TextInput ───────────────────────────────────────────────── */
+
+.es-input {
+  display: inline-flex;
+  align-items: center;
+  border: none;
+  background: transparent;
+  color: var(--text-tertiary);
+  width: 100%;
+  min-width: 0;
+  outline: none;
+  border-radius: inherit;
+  transition:
+    background var(--motion-duration-fast) var(--motion-easing-standard),
+    color var(--motion-duration-fast) var(--motion-easing-standard);
+}
+
+.es-input::placeholder {
+  color: var(--border-default);
+}
+
+.es-input:disabled {
+  opacity: var(--disabled-opacity);
+  cursor: not-allowed;
+}
+
+.es-input:focus-visible {
+  outline: none;
+}
+
+/* ── Hide number-input spinners ──────────────────────────────── */
+
+.es-input[type="number"]::-webkit-inner-spin-button,
+.es-input[type="number"]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+.es-input[type="number"] {
+  -moz-appearance: textfield;
+  appearance: textfield;
+}
+
+/* ── Sizes ───────────────────────────────────────────────────── */
+
+.es-input--xs {
+  padding: var(--input-spacing-xs-y) var(--input-spacing-xs-x);
+  font: var(--input-typography-xs);
+}
+
+.es-input--sm {
+  padding: var(--input-spacing-sm-y) var(--input-spacing-sm-x);
+  font: var(--input-typography-sm);
+}
+
+.es-input--md {
+  padding: var(--input-spacing-md-y) var(--input-spacing-md-x);
+  font: var(--input-typography-md);
+}
+
+.es-input--lg {
+  padding: var(--input-spacing-lg-y) var(--input-spacing-lg-x);
+  font: var(--input-typography-lg);
+}
+
+/* ── Mono override ───────────────────────────────────────────── */
+
+.es-input--mono.es-input--xs { font: var(--input-typography-xs-mono); }
+.es-input--mono.es-input--sm { font: var(--input-typography-sm-mono); }
+.es-input--mono.es-input--md { font: var(--input-typography-md-mono); }
+.es-input--mono.es-input--lg { font: var(--input-typography-lg-mono); }
+
+/* ── High emphasis (standard input) ──────────────────────────── */
+
+.es-input-wrap--high {
+  background: var(--interactive-default);
+}
+
+.es-input-wrap--high::after {
+  border-color: var(--border-default);
+}
+
+.es-input--high {
+  color: var(--text-primary);
+}
+
+.es-input-wrap--high:hover:not(:has(:disabled)):not(:has(:focus))::after {
+  border-color: var(--border-strong);
+}
+
+.es-input-wrap--high:has(:focus)::after {
+  border-color: var(--color-brand-pink);
+}
+
+/* ── Medium emphasis (bold, white text) ──────────────────────── */
+
+.es-input-wrap--medium {
+  background: transparent;
+}
+
+.es-input--medium {
+  color: var(--text-primary);
+}
+
+.es-input--medium.es-input--xs { font: var(--input-typography-xs-bold); }
+.es-input--medium.es-input--sm { font: var(--input-typography-sm-bold); }
+.es-input--medium.es-input--md { font: var(--input-typography-md-bold); }
+.es-input--medium.es-input--lg { font: var(--input-typography-lg-bold); }
+
+.es-input--medium.es-input--mono.es-input--xs { font: var(--input-typography-xs-mono); font-weight: 700; }
+.es-input--medium.es-input--mono.es-input--sm { font: var(--input-typography-sm-mono); font-weight: 700; }
+.es-input--medium.es-input--mono.es-input--md { font: var(--input-typography-md-mono); font-weight: 700; }
+.es-input--medium.es-input--mono.es-input--lg { font: var(--input-typography-lg-mono); font-weight: 700; }
+
+.es-input-wrap--medium:hover:not(:has(:disabled)):not(:has(:focus)) {
+  background: var(--surface-sunken);
+}
+
+.es-input-wrap--medium:hover:not(:has(:disabled)):not(:has(:focus))::after {
+  border-color: var(--border-subtle);
+}
+
+.es-input-wrap--medium:has(:focus) {
+  background: var(--interactive-default);
+}
+
+.es-input-wrap--medium:has(:focus)::after {
+  border-color: var(--color-brand-pink);
+}
+
+/* ── Low emphasis (neutral, borderless at rest) ──────────────── */
+
+.es-input--low {
+  color: var(--text-tertiary);
+}
+
+.es-input-wrap--low:hover:not(:has(:disabled)):not(:has(:focus))::after {
+  border-color: var(--border-default);
+}
+
+.es-input-wrap--low:has(:focus) {
+  background: var(--interactive-default);
+}
+
+.es-input-wrap--low:has(:focus)::after {
+  border-color: var(--color-brand-blue);
+}

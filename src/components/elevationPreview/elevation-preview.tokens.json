@@ -1,0 +1,5 @@
+{
+  "elevation-preview": {
+    "grid-min-width": { "$value": "200px" }
+  }
+}

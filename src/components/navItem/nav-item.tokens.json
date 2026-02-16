@@ -1,0 +1,7 @@
+{
+  "nav-item": {
+    "gap":     { "$value": "2px" },
+    "padding": { "$value": "3px" },
+    "radius":  { "$value": "3rem" }
+  }
+}

@@ -1,0 +1,54 @@
+/* ── Toggle Button Group ─────────────────────────────────────────────── */
+
+/* Separated variant (default) — individual bordered buttons with gap */
+
+.es-toggle-group {
+  display: flex;
+  gap: var(--gap-compact);
+}
+
+.es-toggle-group__btn {
+  padding: var(--inset-compact) var(--inset-normal);
+  font: var(--typography-200-bold);
+  border: var(--border-default-width) solid var(--border-default);
+  border-radius: var(--radius-sm);
+  background: var(--interactive-default);
+  color: var(--text-secondary);
+  cursor: pointer;
+  transition:
+    background var(--motion-duration-fast) var(--motion-easing-standard),
+    color var(--motion-duration-fast) var(--motion-easing-standard),
+    border-color var(--motion-duration-fast) var(--motion-easing-standard);
+}
+
+.es-toggle-group__btn[aria-pressed='true'] {
+  background: var(--color-brand-blue);
+  border-color: var(--color-brand-blue);
+  color: var(--text-on-bold);
+}
+
+/* Segmented variant — fused buttons, 1px separator, no individual borders */
+
+.es-toggle-group--segmented {
+  gap: var(--toggle-button-group-segmented-gap);
+  background: var(--border-subtle);
+  border-radius: var(--radius-sm);
+  overflow: hidden;
+}
+
+.es-toggle-group--segmented .es-toggle-group__btn {
+  border: none;
+  border-radius: 0;
+  color: var(--text-tertiary);
+}
+
+.es-toggle-group--segmented .es-toggle-group__btn:hover {
+  background: var(--interactive-hover);
+  color: var(--text-primary);
+}
+
+.es-toggle-group--segmented .es-toggle-group__btn[aria-pressed='true'] {
+  background: var(--color-brand-pink);
+  border-color: transparent;
+  color: var(--text-on-bold);
+}

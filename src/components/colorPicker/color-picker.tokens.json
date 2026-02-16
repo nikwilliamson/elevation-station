@@ -1,0 +1,11 @@
+{
+  "color-picker": {
+    "swatch-size":       { "$value": "1.5rem" },
+    "input-max-width":   { "$value": "240px" },
+    "colorful-width":    { "$value": "220px" },
+    "saturation-height": { "$value": "180px" },
+    "hue-height":        { "$value": "14px" },
+    "pointer-size":      { "$value": "20px" },
+    "pointer-border":    { "$value": "2px" }
+  }
+}

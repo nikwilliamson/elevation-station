@@ -1,0 +1,6 @@
+{
+  "app": {
+    "gradient-border-width": { "$value": "1rem" },
+    "shell-margin-right":    { "$value": "1rem" }
+  }
+}

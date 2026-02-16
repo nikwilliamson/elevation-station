@@ -27,17 +27,24 @@
     "500-regular":       { "$value": "400 1.563rem/2rem proxima-nova, Helvetica Neue, Arial, Helvetica, sans-serif",     "$type": "other" },
     "500-regular-mono":  { "$value": "400 1.563rem/2rem IBM Plex Mono, monospace",                                       "$type": "other" },
     "500-bold":          { "$value": "700 1.563rem/2rem proxima-nova, Helvetica Neue, Arial, Helvetica, sans-serif",     "$type": "other" },
+    "500-semibold":      { "$value": "600 1.563rem/2rem proxima-nova, Helvetica Neue, Arial, Helvetica, sans-serif",     "$type": "other" },
     "600-bold":          { "$value": "700 1.953rem/2.5rem proxima-nova, Helvetica Neue, Arial, Helvetica, sans-serif",   "$type": "other" }
   },
   "button": {
     "spacing-sm-x":   { "$value": "0.75rem",  "$type": "dimension" },
-    "spacing-sm-y":   { "$value": "0.5rem",   "$type": "dimension" },
+    "spacing-sm-y":   { "$value": "0.25rem",  "$type": "dimension" },
     "spacing-md-x":   { "$value": "1rem",     "$type": "dimension" },
-    "spacing-md-y":   { "$value": "0.75rem",  "$type": "dimension" },
+    "spacing-md-y":   { "$value": "0.625rem", "$type": "dimension" },
+    "spacing-lg-x":   { "$value": "1.5rem",   "$type": "dimension" },
+    "spacing-lg-y":   { "$value": "1rem",     "$type": "dimension" },
     "typography-sm":   { "$value": "{typography.300-semibold}",  "$type": "other" },
     "typography-md":   { "$value": "{typography.400-semibold}", "$type": "other" },
+    "typography-lg":   { "$value": "{typography.500-semibold}", "$type": "other" },
     "radius-sm":       { "$value": "0.134rem", "$type": "dimension" },
-    "radius-md":       { "$value": "0.134rem", "$type": "dimension" }
+    "radius-md":       { "$value": "0.134rem", "$type": "dimension" },
+    "radius-lg":       { "$value": "{radius.sm}", "$type": "dimension" },
+    "focus-ring-width":  { "$value": "{focus.ring-width}" },
+    "focus-ring-offset": { "$value": "{focus.ring-offset}" }
   },
   "input": {
     "spacing-xs-x":    { "$value": "0.5rem",   "$type": "dimension" },
