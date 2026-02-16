@@ -3,7 +3,7 @@ import React from "react"
 import "./header.css"
 
 interface HeaderProps {
-  children: React.ReactNode
+  children?: React.ReactNode
   action?: React.ReactNode
 }
 
