@@ -309,6 +309,46 @@ export function ShadowTokenDesigner() {
   const [copyState, setCopyState] = useState<ButtonState>("idle")
   const copyTimeoutRef = useRef<ReturnType<typeof setTimeout>>(undefined)
 
+  /* ── Resizable panel divider ──────────────────────────────────── */
+  const gridRef = useRef<HTMLDivElement>(null)
+  const fractionRef = useRef(0.5)
+  const resizingRef = useRef(false)
+
+  const applyFraction = useCallback((fraction: number) => {
+    fractionRef.current = fraction
+    if (gridRef.current) {
+      gridRef.current.style.gridTemplateColumns = `${fraction}fr auto ${1 - fraction}fr`
+    }
+  }, [])
+
+  const handleResizePointerDown = useCallback((e: React.PointerEvent) => {
+    e.preventDefault()
+    ;(e.target as Element).setPointerCapture(e.pointerId)
+    resizingRef.current = true
+    gridRef.current?.setAttribute("data-resizing", "")
+    document.body.style.cursor = "col-resize"
+  }, [])
+
+  const handleResizePointerMove = useCallback(
+    (e: React.PointerEvent) => {
+      if (!resizingRef.current || !gridRef.current) return
+      const rect = gridRef.current.getBoundingClientRect()
+      const fraction = Math.min(0.75, Math.max(0.25, (e.clientX - rect.left) / rect.width))
+      applyFraction(fraction)
+    },
+    [applyFraction],
+  )
+
+  const handleResizePointerUp = useCallback(() => {
+    resizingRef.current = false
+    gridRef.current?.removeAttribute("data-resizing")
+    document.body.style.cursor = ""
+  }, [])
+
+  const handleResizeDoubleClick = useCallback(() => {
+    applyFraction(0.5)
+  }, [applyFraction])
+
   const handleEngineChange = useCallback((key: keyof EngineParams, value: number) => {
     setState((prev) => ({ ...prev, engine: { ...prev.engine, [key]: value } }))
   }, [])
@@ -397,7 +437,11 @@ export function ShadowTokenDesigner() {
 
   return (
     <ColorFormatContext.Provider value={colorFormat}>
-    <div className="es-shadow-token-designer" style={{ "--shadow-color": shadowColorHsl, ...(accentColorHsl ? { "--shadow-accent": accentColorHsl } : {}) } as React.CSSProperties}>
+    <div
+      ref={gridRef}
+      className="es-shadow-token-designer"
+      style={{ "--shadow-color": shadowColorHsl, ...(accentColorHsl ? { "--shadow-accent": accentColorHsl } : {}) } as React.CSSProperties}
+    >
       {/* Main content area */}
       <div className="es-shadow-token-designer__main">
         {/* Header */}
@@ -422,6 +466,17 @@ export function ShadowTokenDesigner() {
           onAccentColorChange={handleAccentColorChange}
         />
 
+      </div>
+
+      {/* Resize handle */}
+      <div
+        className="es-shadow-token-designer__resize-handle"
+        onPointerDown={handleResizePointerDown}
+        onPointerMove={handleResizePointerMove}
+        onPointerUp={handleResizePointerUp}
+        onDoubleClick={handleResizeDoubleClick}
+      >
+        <div className="es-shadow-token-designer__resize-handle-pill" />
       </div>
 
       {/* Sidebar */}

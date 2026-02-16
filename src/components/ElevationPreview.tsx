@@ -43,17 +43,8 @@ export type { PreviewLayout }
 
 const LAYOUT_OPTIONS: { label: string; value: PreviewLayout }[] = [
   { label: "List", value: "list" },
-  { label: "2 col", value: "2-col" },
-  { label: "3 col", value: "3-col" },
-  { label: "4 col", value: "4-col" },
+  { label: "Grid", value: "grid" },
 ]
-
-const LAYOUT_COLUMNS: Record<PreviewLayout, number | null> = {
-  "list": null,
-  "2-col": 2,
-  "3-col": 3,
-  "4-col": 4,
-}
 
 export interface ElevationPreviewProps {
   preview: PreviewConfig
@@ -81,7 +72,6 @@ export function ElevationPreview({
   onRemoveElevation,
 }: ElevationPreviewProps) {
   const isList = layout === "list"
-  const columns = LAYOUT_COLUMNS[layout]
   const levelsClass = isList
     ? "es-shadow-token-designer__levels es-shadow-token-designer__levels--list"
     : "es-shadow-token-designer__levels"
@@ -101,7 +91,7 @@ export function ElevationPreview({
         </div>
       </div>
       <LayoutGroup>
-        <motion.div layout className={levelsClass} style={columns ? { "--levels-columns": columns } as React.CSSProperties : undefined}>
+        <motion.div layout className={levelsClass}>
           {elevations.map((level, i) => (
             <motion.div key={level.name} layout transition={{ type: "spring", stiffness: 400, damping: 30 }}>
               <ElevationCard

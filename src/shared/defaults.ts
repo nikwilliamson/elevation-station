@@ -29,7 +29,7 @@ export interface ShadowCurves {
   alphaDistribution?: CurvePoint[];
 }
 
-export type PreviewLayout = 'list' | '2-col' | '3-col' | '4-col';
+export type PreviewLayout = 'list' | 'grid';
 
 export interface PaletteState {
   engine: EngineParams;
@@ -90,5 +90,5 @@ export const DEFAULTS: PaletteState = {
     alphaDistribution: resolvePreset(DEFAULT_CURVES.alphaDistribution),
   },
   colorFormat: 'oklch',
-  previewLayout: '4-col',
+  previewLayout: 'grid',
 };

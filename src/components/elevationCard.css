@@ -22,7 +22,7 @@
 .es-shadow-token-designer__elevation-controls {
   display: grid;
   grid-template-columns: 1fr 2fr;
-  gap: 2rem;
+  gap: 1rem;
   padding: 0 .75rem;
 }
 
