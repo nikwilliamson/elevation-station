@@ -182,7 +182,7 @@ export function hexToHsl(hex: string): string {
   if (delta === 0) return `0deg 0% ${Math.round(l * 100)}%`;
 
   const s = delta / (1 - Math.abs(2 * l - 1));
-  let h = 0;
+  let h: number;
   if (max === r) h = ((g - b) / delta + (g < b ? 6 : 0)) * 60;
   else if (max === g) h = ((b - r) / delta + 2) * 60;
   else h = ((r - g) / delta + 4) * 60;

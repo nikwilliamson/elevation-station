@@ -5,6 +5,10 @@ import { FieldLabel } from './FieldLabel';
 const meta = {
   title: 'Components/FieldLabel',
   component: FieldLabel,
+  tags: ['autodocs'],
+  parameters: {
+    layout: 'centered',
+  },
 } satisfies Meta<typeof FieldLabel>;
 export default meta;
 type Story = StoryObj<typeof meta>;

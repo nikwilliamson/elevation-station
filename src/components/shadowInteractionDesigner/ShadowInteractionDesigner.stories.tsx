@@ -4,8 +4,9 @@ import { ShadowInteractionDesigner } from './ShadowInteractionDesigner';
 const meta = {
   title: 'Page/ShadowInteractionDesigner',
   component: ShadowInteractionDesigner,
+  tags: ['autodocs'],
   parameters: {
-    layout: 'fullscreen',
+    layout: 'centered',
   },
 } satisfies Meta<typeof ShadowInteractionDesigner>;
 export default meta;

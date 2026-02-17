@@ -1,15 +1,20 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
-import { useRef } from 'react';
+import React, { useRef } from 'react';
 import { ResizeHandle } from './ResizeHandle';
 
 const meta = {
   title: 'Components/ResizeHandle',
   component: ResizeHandle,
+  tags: ['autodocs'],
+  parameters: {
+    layout: 'centered',
+  },
 } satisfies Meta<typeof ResizeHandle>;
 export default meta;
 type Story = StoryObj<typeof meta>;
 
 export const Default: Story = {
+  args: { containerRef: React.createRef<HTMLDivElement>() },
   render: () => {
     const ref = useRef<HTMLDivElement>(null);
     return (

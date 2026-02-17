@@ -4,6 +4,10 @@ import { OutputSection } from './OutputSection';
 const meta = {
   title: 'Components/OutputSection',
   component: OutputSection,
+  tags: ['autodocs'],
+  parameters: {
+    layout: 'centered',
+  },
 } satisfies Meta<typeof OutputSection>;
 export default meta;
 type Story = StoryObj<typeof meta>;

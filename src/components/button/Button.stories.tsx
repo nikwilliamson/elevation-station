@@ -4,8 +4,12 @@ import { useState } from 'react';
 import { Button, type ButtonState } from './Button';
 
 const meta = {
-  title: 'Components/Button',
+  title: "Components/Button",
   component: Button,
+  tags: ["autodocs"],
+  parameters: {
+    layout: "centered",
+  },
   args: { onClick: fn() },
 } satisfies Meta<typeof Button>;
 export default meta;

@@ -7,6 +7,10 @@ import type { PreviewLayout } from '../../shared/defaults';
 const meta = {
   title: 'Composed/ElevationPreview',
   component: ElevationPreview,
+  tags: ['autodocs'],
+  parameters: {
+    layout: 'centered',
+  },
 } satisfies Meta<typeof ElevationPreview>;
 export default meta;
 type Story = StoryObj<typeof meta>;
@@ -24,6 +28,26 @@ const SHADOWS = [
 ];
 
 export const Default: Story = {
+  args: {
+    preview: { bgHex: '#f1f1f1', surfaceHex: '#ffffff' },
+    elevations: ELEVATIONS,
+    shadowStacks: SHADOWS,
+    interactiveShadowStacks: {},
+    interactiveColorHsls: {},
+    shadowColorHsl: 'hsl(260, 60%, 12%)',
+    accentColorHsl: 'hsl(234, 70%, 20%)',
+    layout: 'grid',
+    onLayoutChange: fn(),
+    onPreviewChange: fn(),
+    onNameChange: fn(),
+    onDepthChange: fn(),
+    onZIndexChange: fn(),
+    onRemoveElevation: fn(),
+    onTypeChange: fn(),
+    onInteractionStateChange: fn(),
+    onInteractionStateEnabledChange: fn(),
+    onLayerCountChange: fn(),
+  },
   render: () => {
     const [layout, setLayout] = useState<PreviewLayout>('grid');
     return (

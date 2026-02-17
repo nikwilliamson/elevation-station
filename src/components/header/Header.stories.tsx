@@ -6,6 +6,10 @@ import { Button } from '../button/Button';
 const meta = {
   title: 'Page/Header',
   component: Header,
+  tags: ['autodocs'],
+  parameters: {
+    layout: 'centered',
+  },
 } satisfies Meta<typeof Header>;
 export default meta;
 type Story = StoryObj<typeof meta>;

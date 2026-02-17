@@ -4,8 +4,9 @@ import { ShadowTokenDesigner } from './ShadowTokenDesigner';
 const meta = {
   title: 'Page/ShadowTokenDesigner',
   component: ShadowTokenDesigner,
+  tags: ['autodocs'],
   parameters: {
-    layout: 'fullscreen',
+    layout: 'centered',
   },
 } satisfies Meta<typeof ShadowTokenDesigner>;
 export default meta;

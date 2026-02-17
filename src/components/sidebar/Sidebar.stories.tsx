@@ -1,10 +1,15 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
+import { fn } from 'storybook/test';
 import React, { useState } from 'react';
 import { Sidebar, type SidebarTab } from './Sidebar';
 
 const meta = {
   title: 'Components/Sidebar',
   component: Sidebar,
+  tags: ['autodocs'],
+  parameters: {
+    layout: 'centered',
+  },
 } satisfies Meta<typeof Sidebar>;
 export default meta;
 type Story = StoryObj<typeof meta>;
@@ -31,6 +36,7 @@ const TABS: SidebarTab[] = [
 ];
 
 export const Default: Story = {
+  args: { tabs: TABS, activeTab: 'preview', onTabChange: fn(), layoutId: 'sb-sidebar' },
   render: () => {
     const [tab, setTab] = useState('preview');
     return (

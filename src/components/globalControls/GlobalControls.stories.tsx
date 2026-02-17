@@ -5,6 +5,10 @@ import { GlobalControls } from './GlobalControls';
 const meta = {
   title: 'Composed/GlobalControls',
   component: GlobalControls,
+  tags: ['autodocs'],
+  parameters: {
+    layout: 'centered',
+  },
 } satisfies Meta<typeof GlobalControls>;
 export default meta;
 type Story = StoryObj<typeof meta>;

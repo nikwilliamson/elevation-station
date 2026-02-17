@@ -1,4 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
+import { fn } from 'storybook/test';
 import { useState } from 'react';
 import { ControlsGrid } from './ControlsGrid';
 import { DEFAULTS } from '../../shared/defaults';
@@ -9,11 +10,27 @@ import type { CurvePoint } from '../../shared/curvePresets';
 const meta = {
   title: 'Composed/ControlsGrid',
   component: ControlsGrid,
+  tags: ['autodocs'],
+  parameters: {
+    layout: 'centered',
+  },
 } satisfies Meta<typeof ControlsGrid>;
 export default meta;
 type Story = StoryObj<typeof meta>;
 
 export const Default: Story = {
+  args: {
+    engine: DEFAULTS.engine,
+    onEngineChange: fn(),
+    curves: DEFAULTS.curves,
+    onCurveChange: fn(),
+    colorFormat: 'oklch',
+    onColorFormatChange: fn(),
+    shadowColorHex: DEFAULTS.shadowColorHex,
+    accentColorHex: DEFAULTS.accentColorHex,
+    onColorChange: fn(),
+    onAccentColorChange: fn(),
+  },
   render: () => {
     const [engine, setEngine] = useState<EngineParams>(DEFAULTS.engine);
     const [curves, setCurves] = useState<ShadowCurves>(DEFAULTS.curves);

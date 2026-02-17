@@ -5,6 +5,10 @@ import { StatePanel } from './StatePanel';
 const meta = {
   title: 'Composed/StatePanel',
   component: StatePanel,
+  tags: ['autodocs'],
+  parameters: {
+    layout: 'centered',
+  },
 } satisfies Meta<typeof StatePanel>;
 export default meta;
 type Story = StoryObj<typeof meta>;

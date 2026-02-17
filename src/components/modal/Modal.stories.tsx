@@ -1,4 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
+import { fn } from 'storybook/test';
 import { useState } from 'react';
 import { Modal } from './Modal';
 import { Button } from '../button/Button';
@@ -6,11 +7,16 @@ import { Button } from '../button/Button';
 const meta = {
   title: 'Components/Modal',
   component: Modal,
+  tags: ['autodocs'],
+  parameters: {
+    layout: 'centered',
+  },
 } satisfies Meta<typeof Modal>;
 export default meta;
 type Story = StoryObj<typeof meta>;
 
 export const Default: Story = {
+  args: { open: false, onClose: fn(), title: 'Edit Elevation', children: 'Modal content goes here.' },
   render: () => {
     const [open, setOpen] = useState(false);
     return (
@@ -25,6 +31,7 @@ export const Default: Story = {
 };
 
 export const OpenByDefault: Story = {
+  args: { open: true, onClose: fn(), title: 'Shadow Settings', children: 'This modal opens immediately.' },
   render: () => {
     const [open, setOpen] = useState(true);
     return (

@@ -4,6 +4,10 @@ import { Legend } from './Legend';
 const meta = {
   title: 'Components/Legend',
   component: Legend,
+  tags: ['autodocs'],
+  parameters: {
+    layout: 'centered',
+  },
 } satisfies Meta<typeof Legend>;
 export default meta;
 type Story = StoryObj<typeof meta>;

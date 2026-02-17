@@ -7,11 +7,23 @@ import type { ColorFormat } from '../../shared/colorPalette';
 const meta = {
   title: 'Composed/ColorControls',
   component: ColorControls,
+  tags: ['autodocs'],
+  parameters: {
+    layout: 'centered',
+  },
 } satisfies Meta<typeof ColorControls>;
 export default meta;
 type Story = StoryObj<typeof meta>;
 
 export const Default: Story = {
+  args: {
+    colorFormat: 'oklch',
+    onColorFormatChange: fn(),
+    shadowColorHex: '#170a32',
+    accentColorHex: '#101756',
+    onColorChange: fn(),
+    onAccentColorChange: fn(),
+  },
   render: () => {
     const [format, setFormat] = useState<ColorFormat>('oklch');
     const [shadow, setShadow] = useState('#170a32');

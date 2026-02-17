@@ -4,6 +4,10 @@ import { ShadowPreview } from './ShadowPreview';
 const meta = {
   title: 'Components/ShadowPreview',
   component: ShadowPreview,
+  tags: ['autodocs'],
+  parameters: {
+    layout: 'centered',
+  },
 } satisfies Meta<typeof ShadowPreview>;
 export default meta;
 type Story = StoryObj<typeof meta>;

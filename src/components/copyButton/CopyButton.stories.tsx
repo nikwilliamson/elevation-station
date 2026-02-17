@@ -4,6 +4,10 @@ import { CopyButton } from './CopyButton';
 const meta = {
   title: 'Components/CopyButton',
   component: CopyButton,
+  tags: ['autodocs'],
+  parameters: {
+    layout: 'centered',
+  },
 } satisfies Meta<typeof CopyButton>;
 export default meta;
 type Story = StoryObj<typeof meta>;

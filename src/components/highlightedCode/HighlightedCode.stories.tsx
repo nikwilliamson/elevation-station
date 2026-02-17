@@ -4,6 +4,10 @@ import { HighlightedCode } from './HighlightedCode';
 const meta = {
   title: 'Components/HighlightedCode',
   component: HighlightedCode,
+  tags: ['autodocs'],
+  parameters: {
+    layout: 'centered',
+  },
 } satisfies Meta<typeof HighlightedCode>;
 export default meta;
 type Story = StoryObj<typeof meta>;

@@ -5,6 +5,10 @@ import { TextInput } from './TextInput';
 const meta = {
   title: 'Components/TextInput',
   component: TextInput,
+  tags: ['autodocs'],
+  parameters: {
+    layout: 'centered',
+  },
   args: { onChange: fn() },
 } satisfies Meta<typeof TextInput>;
 export default meta;

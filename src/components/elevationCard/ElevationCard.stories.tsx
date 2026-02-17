@@ -5,6 +5,10 @@ import { ElevationCard } from './ElevationCard';
 const meta = {
   title: 'Composed/ElevationCard',
   component: ElevationCard,
+  tags: ['autodocs'],
+  parameters: {
+    layout: 'centered',
+  },
 } satisfies Meta<typeof ElevationCard>;
 export default meta;
 type Story = StoryObj<typeof meta>;

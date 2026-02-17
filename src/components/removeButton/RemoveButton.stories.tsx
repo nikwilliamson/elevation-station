@@ -5,6 +5,10 @@ import { RemoveButton } from './RemoveButton';
 const meta = {
   title: 'Components/RemoveButton',
   component: RemoveButton,
+  tags: ['autodocs'],
+  parameters: {
+    layout: 'centered',
+  },
   args: { onClick: fn() },
 } satisfies Meta<typeof RemoveButton>;
 export default meta;
