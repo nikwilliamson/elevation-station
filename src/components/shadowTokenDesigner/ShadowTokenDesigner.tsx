@@ -40,13 +40,16 @@ function formatCssOutput(
   interactiveShadowStacks: Record<number, Record<InteractionStateName, string>>,
   interactiveColorHsls: Record<number, Record<InteractionStateName, { shadow: string; accent: string | null }>>,
 ): string {
-  const lines: string[] = [`--shadow-color: ${shadowColorHsl};`]
+  const indent = "  "
+  const valueIndent = `${indent}    `
+  const reindentStack = (stack: string) => stack.replace(/\n\s*/g, `\n${valueIndent}`)
+  const lines: string[] = [`${indent}--shadow-color: ${shadowColorHsl};`]
   if (accentColorHsl) {
-    lines.push(`--shadow-accent: ${accentColorHsl};`)
+    lines.push(`${indent}--shadow-accent: ${accentColorHsl};`)
   }
   state.elevations.forEach((level, i) => {
     const safeName = sanitiseCssName(level.name)
-    lines.push(`--z-index-${safeName}: ${level.zIndex};`)
+    lines.push(`${indent}--z-index-${safeName}: ${level.zIndex};`)
     if (level.type === "interactive" && interactiveShadowStacks[i]) {
       const stateStacks = interactiveShadowStacks[i]
       const stateColors = interactiveColorHsls[i]
@@ -55,21 +58,21 @@ function formatCssOutput(
         if (stateColors?.[stateName]) {
           const sc = stateColors[stateName]
           if (sc.shadow !== shadowColorHsl) {
-            lines.push(`--shadow-color-${safeName}-${stateName}: ${sc.shadow};`)
+            lines.push(`${indent}--shadow-color-${safeName}-${stateName}: ${sc.shadow};`)
           }
           if (sc.accent && sc.accent !== accentColorHsl) {
-            lines.push(`--shadow-accent-${safeName}-${stateName}: ${sc.accent};`)
+            lines.push(`${indent}--shadow-accent-${safeName}-${stateName}: ${sc.accent};`)
           }
         }
-        lines.push(`--shadow-elevation-${safeName}-${stateName}:`)
-        lines.push(`    ${stateStacks[stateName]};`)
+        lines.push(`${indent}--shadow-elevation-${safeName}-${stateName}:`)
+        lines.push(`${valueIndent}${reindentStack(stateStacks[stateName])};`)
       }
     } else {
-      lines.push(`--shadow-elevation-${safeName}:`)
-      lines.push(`    ${shadowStacks[i]};`)
+      lines.push(`${indent}--shadow-elevation-${safeName}:`)
+      lines.push(`${valueIndent}${reindentStack(shadowStacks[i])};`)
     }
   })
-  return lines.join("\n")
+  return `:root {\n${lines.join("\n")}\n}`
 }
 
 function formatTokenJson(shadowColorHsl: string, state: PaletteState): string {

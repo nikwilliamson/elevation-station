@@ -19,7 +19,7 @@
 .es-output__code pre {
   margin: 0;
   font: var(--typography-200-regular-mono);
-  color: var(--color-neutral-200);
+  color: var(--text-secondary);
   white-space: pre;
 }
 
