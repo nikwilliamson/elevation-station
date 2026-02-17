@@ -61,3 +61,9 @@
   background: var(--surface-primary);
   border-radius: var(--resize-handle-pill-radius);
 }
+
+@media (max-width: 600px) {
+  .es-resize-handle {
+    display: none;
+  }
+}

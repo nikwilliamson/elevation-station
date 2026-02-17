@@ -5,7 +5,7 @@ import {
   useTransform,
   useVelocity,
 } from "motion/react"
-import React, { useEffect, useMemo, useRef, useState } from "react"
+import React, { useCallback, useEffect, useMemo, useRef, useState } from "react"
 import { TabSelect } from "../tabSelect/TabSelect"
 import "./sidebar.css"
 
@@ -87,6 +87,7 @@ export function Sidebar<T extends string>({
   tabSize = "lg",
 }: SidebarProps<T>) {
   const [isMounted, setIsMounted] = useState(false)
+  const [drawerExpanded, setDrawerExpanded] = useState(false)
   const viewsRef = useRef<HTMLDivElement>(null)
   const [viewsWidth, setViewsWidth] = useState(0)
 
@@ -111,18 +112,47 @@ export function Sidebar<T extends string>({
 
   const activeIndex = tabs.findIndex((t) => t.value === activeTab)
 
+  const handleTabChange = useCallback(
+    (value: T) => {
+      if (value === activeTab) {
+        setDrawerExpanded((prev) => !prev)
+      } else {
+        onTabChange(value)
+        setDrawerExpanded(true)
+      }
+    },
+    [activeTab, onTabChange],
+  )
+
   return (
-    <aside className="es-sidebar" aria-label="Controls">
+    <aside
+      className="es-sidebar"
+      aria-label="Controls"
+      data-drawer-expanded={drawerExpanded || undefined}
+    >
       <div className="es-sidebar__tabs">
         <TabSelect
           options={tabOptions}
           value={activeTab}
-          onChange={onTabChange}
+          onChange={handleTabChange}
           layoutId={layoutId}
           variant={tabVariant}
           size={tabSize}
           ariaLabel="Sidebar"
         />
+      </div>
+
+      <div className="es-sidebar__drawer-bar">
+        <h2 className="es-title es-title--sm">{tabs[activeIndex]?.title}</h2>
+        <button
+          className="es-sidebar__drawer-toggle"
+          onClick={() => setDrawerExpanded((prev) => !prev)}
+          aria-label={drawerExpanded ? "Collapse drawer" : "Expand drawer"}
+        >
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+            <path d="M4 10L8 6L12 10" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+          </svg>
+        </button>
       </div>
 
       <div ref={viewsRef} className="es-sidebar__views">

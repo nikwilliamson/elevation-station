@@ -15,6 +15,29 @@
   min-height: 0;
 }
 
+@media (max-width: 900px) {
+  .es-shadow-token-designer {
+    --spg-padding-y: var(--inset-normal);
+    --spg-padding-x: var(--inset-open);
+  }
+}
+
+@media (max-width: 600px) {
+  .es-shadow-token-designer {
+    --spg-padding-y: 0.75rem;
+    --spg-padding-x: 0.75rem;
+    grid-template-columns: 1fr;
+    grid-template-rows: auto auto;
+    min-height: 0;
+    flex: none;
+  }
+
+  .es-shadow-token-designer__main {
+    overflow: visible;
+    scrollbar-gutter: auto;
+  }
+}
+
 .es-shadow-token-designer[data-resizing] {
   user-select: none;
 }

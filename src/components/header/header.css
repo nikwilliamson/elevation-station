@@ -17,3 +17,9 @@
 .es-header__action {
   margin-left: auto;
 }
+
+@media (max-width: 600px) {
+  .es-header {
+    display: none;
+  }
+}

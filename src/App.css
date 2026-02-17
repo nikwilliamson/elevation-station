@@ -80,3 +80,36 @@ body {
   pointer-events: none;
 }
 
+/* ── Mobile (≤ 600px) ────────────────────────────────────────────── */
+
+@media (max-width: 600px) {
+  :root {
+    font-size: 14px;
+  }
+
+  body {
+    overflow: auto;
+  }
+
+  .es-app {
+    height: auto;
+    overflow: visible;
+    margin-right: 0;
+  }
+
+  .es-app > main {
+    display: block;
+    overflow-x: hidden;
+  }
+
+  .es-gradient-border {
+    display: none;
+  }
+
+  input,
+  textarea,
+  select {
+    font-size: 16px;
+  }
+}
+

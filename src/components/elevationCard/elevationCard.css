@@ -97,3 +97,24 @@
 .es-shadow-token-designer__elevation-card--list > .es-shadow-token-designer__elevation-preview-wrap > .es-shadow-preview {
   padding: var(--elevation-card-list-preview-padding);
 }
+
+/* ── Drawer variant (≤ 600px inside sidebar) ───────────────────────── */
+
+@media (max-width: 600px) {
+  .es-sidebar .es-shadow-token-designer__elevation-meta {
+    display: none;
+  }
+
+  .es-sidebar .es-shadow-token-designer__elevation-card {
+    flex-shrink: 0;
+    flex-direction: column;
+  }
+
+  .es-sidebar .es-shadow-token-designer__elevation-name {
+    font: var(--typography-200-semibold);
+  }
+
+  .es-sidebar .es-shadow-token-designer__elevation-actions {
+    display: none;
+  }
+}

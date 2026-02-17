@@ -38,6 +38,26 @@
   gap: var(--gap-compact);
 }
 
+/* ── Drawer variant (≤ 600px inside sidebar) ───────────────────────── */
+
+@media (max-width: 600px) {
+  .es-sidebar .es-shadow-token-designer__preview-toolbar {
+    display: none;
+  }
+
+  .es-sidebar .es-shadow-token-designer__levels {
+    display: flex;
+    overflow-x: auto;
+    gap: var(--gap-compact);
+    padding-bottom: var(--inset-compact);
+  }
+
+  .es-sidebar .es-shadow-token-designer__levels > * {
+    flex: 0 0 calc((100% - var(--gap-compact) * 2) / 2.25);
+    min-width: 0;
+  }
+}
+
 /* ── Modal: 2-column grid ──────────────────────────────────────────── */
 
 .es-elevation-modal__grid {
