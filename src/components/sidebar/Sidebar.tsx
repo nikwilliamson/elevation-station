@@ -87,7 +87,10 @@ export function Sidebar<T extends string>({
   tabSize = "lg",
 }: SidebarProps<T>) {
   const [isMounted, setIsMounted] = useState(false)
-  const [drawerExpanded, setDrawerExpanded] = useState(false)
+  const [drawerExpanded, setDrawerExpanded] = useState(
+    () => window.matchMedia("(max-width: 600px)").matches,
+  )
+  const sidebarRef = useRef<HTMLElement>(null)
   const viewsRef = useRef<HTMLDivElement>(null)
   const [viewsWidth, setViewsWidth] = useState(0)
 
@@ -103,6 +106,22 @@ export function Sidebar<T extends string>({
     })
     ro.observe(el)
     return () => ro.disconnect()
+  }, [])
+
+  useEffect(() => {
+    const el = sidebarRef.current
+    if (!el) return
+    const ro = new ResizeObserver(([entry]) => {
+      document.documentElement.style.setProperty(
+        "--sidebar-drawer-height",
+        `${entry.borderBoxSize[0].blockSize}px`,
+      )
+    })
+    ro.observe(el)
+    return () => {
+      ro.disconnect()
+      document.documentElement.style.removeProperty("--sidebar-drawer-height")
+    }
   }, [])
 
   const tabOptions = useMemo(
@@ -126,6 +145,7 @@ export function Sidebar<T extends string>({
 
   return (
     <aside
+      ref={sidebarRef}
       className="es-sidebar"
       aria-label="Controls"
       data-drawer-expanded={drawerExpanded || undefined}

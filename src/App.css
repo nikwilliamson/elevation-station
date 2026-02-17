@@ -89,6 +89,7 @@ body {
 
   body {
     overflow: auto;
+    margin-bottom: var(--sidebar-drawer-height, 0px);
   }
 
   .es-app {

@@ -98,6 +98,10 @@
     padding: var(--spg-padding-y) var(--spg-padding-x);
   }
 
+  .es-sidebar__drawer-bar .es-title {
+    font: var(--typography-200-semibold);
+  }
+
   .es-sidebar__header {
     display: none;
   }
