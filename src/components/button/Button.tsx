@@ -15,11 +15,16 @@ import "./button.css"
 export type ButtonEmphasis = "low" | "medium" | "high"
 export type ButtonSize = "xs" | "sm" | "md" | "lg"
 export type ButtonState = "idle" | "processing" | "success" | "error"
+export type ButtonColor = "default" | "destructive"
 
 export interface ButtonProps
   extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   emphasis?: ButtonEmphasis
   size?: ButtonSize
+  /** Renders as a square icon button with no text padding */
+  icon?: boolean
+  /** Color variant */
+  color?: ButtonColor
   /** When provided, enables animated multistate mode */
   state?: ButtonState
   /** Custom labels per state */
@@ -48,6 +53,8 @@ export function Button({
   children,
   emphasis = "high",
   size = "md",
+  icon,
+  color = "default",
   state,
   stateLabels,
   className,
@@ -86,6 +93,8 @@ export function Button({
     "es-button",
     `es-button--${emphasis}`,
     `es-button--${size}`,
+    icon && "es-button--icon",
+    color !== "default" && `es-button--${color}`,
     isMultistate && "es-button--multistate",
     isMultistate && state && `es-button--state-${state}`,
     className,

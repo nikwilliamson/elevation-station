@@ -1,4 +1,4 @@
-import React, { useCallback, useState } from "react"
+import React, { useCallback, useRef, useState } from "react"
 
 import "./shadowPreview.css"
 
@@ -29,11 +29,32 @@ export const ShadowPreview = React.memo<ShadowPreviewProps>(
       return "default"
     }, [enabledStates])
 
+    const stateOrder: InteractionStateName[] = ["default", "hover", "active"]
+    const keyboardControlled = useRef(false)
+
     // Mouse handlers always set the visual state directly
-    const handleMouseEnter = useCallback(() => setCurrentState("hover"), [])
-    const handleMouseLeave = useCallback(() => setCurrentState("default"), [])
-    const handleMouseDown = useCallback(() => setCurrentState("active"), [])
+    const handleMouseEnter = useCallback(() => {
+      if (!keyboardControlled.current) setCurrentState("hover")
+    }, [])
+    const handleMouseLeave = useCallback(() => {
+      if (!keyboardControlled.current) setCurrentState("default")
+    }, [])
+    const handleMouseDown = useCallback(() => {
+      keyboardControlled.current = false
+      setCurrentState("active")
+    }, [])
     const handleMouseUp = useCallback(() => setCurrentState("hover"), [])
+
+    const handleKeyDown = useCallback((e: React.KeyboardEvent) => {
+      if (e.key === "Enter" || e.key === " ") {
+        e.preventDefault()
+        keyboardControlled.current = true
+        setCurrentState((prev) => {
+          const idx = stateOrder.indexOf(prev)
+          return stateOrder[(idx + 1) % stateOrder.length]
+        })
+      }
+    }, [])
 
     const valueState = isInteractive ? resolveValues(currentState) : currentState
 
@@ -69,6 +90,7 @@ export const ShadowPreview = React.memo<ShadowPreviewProps>(
             onMouseLeave={handleMouseLeave}
             onMouseDown={handleMouseDown}
             onMouseUp={handleMouseUp}
+            onKeyDown={handleKeyDown}
             role="button"
             tabIndex={0}
           >
@@ -100,6 +122,10 @@ export const ShadowPreview = React.memo<ShadowPreviewProps>(
           onMouseLeave={isInteractive ? handleMouseLeave : undefined}
           onMouseDown={isInteractive ? handleMouseDown : undefined}
           onMouseUp={isInteractive ? handleMouseUp : undefined}
+          onKeyDown={isInteractive ? handleKeyDown : undefined}
+          tabIndex={isInteractive ? 0 : undefined}
+          role={isInteractive ? "button" : undefined}
+          aria-label={isInteractive ? "Cycle interaction state" : undefined}
         />
       </div>
     )

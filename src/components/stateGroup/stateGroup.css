@@ -1,0 +1,7 @@
+/* ── State Group ─────────────────────────────────────────────────────── */
+
+.es-state-group {
+  display: flex;
+  flex-direction: column;
+  gap: var(--state-panel-gap, var(--gap-normal));
+}

@@ -6,6 +6,8 @@ import { CURVE_PRESETS, type CurvePoint } from "../../shared/curvePresets"
 import { Legend } from "../legend/Legend"
 import { TabSelect } from "../tabSelect/TabSelect"
 
+import "./bezierCurveEditor.css"
+
 /* ── Types ─────────────────────────────────────────────────────── */
 
 export type { CurvePoint }

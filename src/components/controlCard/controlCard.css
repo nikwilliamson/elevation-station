@@ -1,0 +1,25 @@
+/* ── Control Card ────────────────────────────────────────────────────── */
+
+.es-control-card {
+  display: flex;
+  flex-direction: column;
+  gap: var(--control-card-gap);
+  min-width: 0;
+}
+
+/* ── Content slot ───────────────────────────────────────────────────── */
+
+.es-control-card__content {
+  display: flex;
+  flex-direction: column;
+  gap: var(--gap-normal);
+  background: var(--interactive-default);
+  border: var(--border-default-width) solid var(--border-subtle);
+  border-radius: var(--radius-sm);
+  padding: var(--inset-normal);
+}
+
+.es-control-card__content > * + * {
+  padding-top: var(--gap-normal);
+  border-top: var(--border-default-width) solid var(--border-subtle);
+}

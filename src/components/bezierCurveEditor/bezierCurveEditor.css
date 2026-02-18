@@ -1,0 +1,133 @@
+/* ── Bezier Curve Editor ──────────────────────────────────────────── */
+
+.es-bezier-editor {
+  display: flex;
+  flex-direction: column;
+  gap: var(--gap-compact);
+}
+
+.es-bezier-editor__presets {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--bezier-editor-preset-gap);
+}
+
+.es-bezier-editor__preset-btn {
+  padding: var(--bezier-editor-preset-padding-y) var(--bezier-editor-preset-padding-x);
+  font: var(--typography-200-regular);
+  border: var(--border-default-width) solid var(--border-default);
+  border-radius: var(--radius-sm);
+  background: transparent;
+  color: var(--text-secondary);
+  cursor: pointer;
+  transition:
+    background var(--motion-duration-fast) var(--motion-easing-standard),
+    color var(--motion-duration-fast) var(--motion-easing-standard),
+    border-color var(--motion-duration-fast) var(--motion-easing-standard);
+}
+
+.es-bezier-editor__preset-btn:hover {
+  background: var(--interactive-hover);
+  color: var(--text-primary);
+}
+
+.es-bezier-editor__preset-btn[aria-pressed='true'] {
+  background: var(--color-brand-blue);
+  border-color: var(--color-brand-blue);
+  color: var(--text-on-bold);
+}
+
+.es-bezier-editor__canvas {
+  grid-column: 2;
+  grid-row: 1;
+  position: relative;
+  width: 100%;
+  aspect-ratio: 1;
+  background: var(--interactive-default);
+  border: var(--border-default-width) solid var(--border-subtle);
+  border-radius: var(--radius-sm);
+  overflow: hidden;
+}
+
+.es-bezier-editor__grid {
+  position: absolute;
+  inset: 0 calc(var(--border-default-width) * -1) calc(var(--border-default-width) * -1) 0;
+  background:
+    repeating-linear-gradient(to right,
+      transparent 0 calc(25% - var(--border-default-width)),
+      var(--border-subtle) calc(25% - var(--border-default-width)) 25%),
+    repeating-linear-gradient(to bottom,
+      transparent 0 calc(25% - var(--border-default-width)),
+      var(--border-subtle) calc(25% - var(--border-default-width)) 25%);
+  pointer-events: none;
+}
+
+.es-bezier-editor__grid--custom-x {
+  background:
+    repeating-linear-gradient(to bottom,
+      transparent 0 calc(25% - var(--border-default-width)),
+      var(--border-subtle) calc(25% - var(--border-default-width)) 25%);
+}
+
+.es-bezier-editor__chart-area {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  grid-template-rows: 1fr auto;
+  gap: var(--gap-compact);
+}
+
+.es-bezier-editor__canvas-col {
+  display: contents;
+}
+
+.es-bezier-editor__y-axis {
+  grid-column: 1;
+  grid-row: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.es-bezier-editor__y-axis .es-bezier-editor__axis-label {
+  writing-mode: vertical-rl;
+  transform: rotate(180deg);
+}
+
+.es-bezier-editor__x-axis {
+  grid-column: 2;
+  grid-row: 2;
+  display: flex;
+  justify-content: space-between;
+}
+
+.es-bezier-editor__axis-label {
+  font: var(--typography-100-regular-mono);
+  color: var(--text-tertiary);
+  line-height: 1;
+}
+
+.es-bezier-editor__svg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  user-select: none;
+  pointer-events: none;
+}
+
+.es-bezier-editor__point {
+  position: absolute;
+  width: var(--bezier-editor-point-size);
+  height: var(--bezier-editor-point-size);
+  translate: -50% -50%;
+  z-index: 1;
+  cursor: grab;
+  border-radius: 50%;
+  background: var(--interactive-default);
+  border: var(--bezier-editor-point-border) solid currentColor;
+  transition: box-shadow var(--motion-duration-fast) var(--motion-easing-standard);
+}
+
+.es-bezier-editor__point[data-active] {
+  box-shadow: 0 0 0 7px color-mix(in srgb, currentColor 10%, transparent);
+}

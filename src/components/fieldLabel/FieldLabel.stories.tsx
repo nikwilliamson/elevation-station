@@ -33,6 +33,10 @@ export const Small: Story = {
   args: { label: 'Small Label', size: 'sm' },
 };
 
+export const Medium: Story = {
+  args: { label: 'Medium Label', size: 'md' },
+};
+
 export const Large: Story = {
   args: { label: 'Large Label', size: 'lg' },
 };

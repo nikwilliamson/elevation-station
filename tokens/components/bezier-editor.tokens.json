@@ -1,9 +1,9 @@
 {
   "bezier-editor": {
-    "preset-gap":       { "$value": "8px" },
-    "preset-padding-x": { "$value": "8px" },
-    "preset-padding-y": { "$value": "4px" },
-    "point-size":       { "$value": "1rem" },
-    "point-border":     { "$value": "2px" }
+    "preset-gap":       { "$value": "8px",  "$type": "dimension" },
+    "preset-padding-x": { "$value": "8px",  "$type": "dimension" },
+    "preset-padding-y": { "$value": "4px",  "$type": "dimension" },
+    "point-size":       { "$value": "1rem", "$type": "dimension" },
+    "point-border":     { "$value": "2px",  "$type": "dimension" }
   }
 }

@@ -1,6 +1,6 @@
 /* ── Elevation levels grid ───────────────────────────────────────────── */
 
-.es-shadow-token-designer__levels {
+.es-elevation-preview__levels {
   container-type: inline-size;
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(min(100%, var(--elevation-preview-grid-min-width)), 1fr));
@@ -9,13 +9,13 @@
 
 /* ── List view ───────────────────────────────────────────────────────── */
 
-.es-shadow-token-designer__levels--list {
+.es-elevation-preview__levels--list {
   grid-template-columns: 1fr;
 }
 
 /* ── Preview toolbar (colors + view controls) ──────────────────────── */
 
-.es-shadow-token-designer__preview-toolbar {
+.es-elevation-preview__toolbar {
   display: flex;
   gap: var(--gap-normal);
   background: var(--interactive-default);
@@ -25,14 +25,14 @@
   align-items: flex-end;
 }
 
-.es-shadow-token-designer__preview-colors {
+.es-elevation-preview__colors {
   display: flex;
   gap: var(--gap-normal);
   flex: 1;
   min-width: 0;
 }
 
-.es-shadow-token-designer__preview-controls {
+.es-elevation-preview__controls {
   display: flex;
   align-items: center;
   gap: var(--gap-compact);
@@ -41,98 +41,19 @@
 /* ── Drawer variant (≤ 600px inside sidebar) ───────────────────────── */
 
 @media (max-width: 600px) {
-  .es-sidebar .es-shadow-token-designer__preview-toolbar {
+  .es-sidebar .es-elevation-preview__toolbar {
     display: none;
   }
 
-  .es-sidebar .es-shadow-token-designer__levels {
+  .es-sidebar .es-elevation-preview__levels {
     display: flex;
     overflow-x: auto;
     gap: var(--gap-compact);
     padding-bottom: var(--inset-compact);
   }
 
-  .es-sidebar .es-shadow-token-designer__levels > * {
+  .es-sidebar .es-elevation-preview__levels > * {
     flex: 0 0 calc((100% - var(--gap-compact) * 2) / 2.25);
     min-width: 0;
   }
-}
-
-/* ── Modal: 2-column grid ──────────────────────────────────────────── */
-
-.es-elevation-modal__grid {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: var(--gap-normal);
-}
-
-.es-elevation-modal__column {
-  display: flex;
-  flex-direction: column;
-  gap: var(--gap-normal);
-}
-
-.es-elevation-modal__column--scroll {
-  overflow-y: auto;
-}
-
-/* ── Modal: static sizing ────────────────────────────────────────────── */
-
-.es-modal:not(.es-modal--interactive) {
-  --sid-gap: var(--gap-normal);
-  --sid-padding: var(--inset-spacious);
-  --sid-card-radius: var(--radius-md);
-  --sid-card-bg: var(--interactive-default);
-  --sid-card-border: var(--border-subtle-shorthand);
-
-  min-width: 680px;
-}
-
-/* ── Modal: interactive sizing ───────────────────────────────────────── */
-
-.es-modal--interactive {
-  --sid-gap: var(--gap-normal);
-  --sid-padding: var(--inset-spacious);
-  --sid-card-radius: var(--radius-md);
-  --sid-card-bg: var(--interactive-default);
-  --sid-card-border: var(--border-subtle-shorthand);
-
-  width: 80vw;
-  height: 80vh;
-  max-width: 80vw;
-  max-height: 80vh;
-  overflow: hidden;
-}
-
-.es-modal--interactive > .es-modal__body {
-  flex: 1;
-  min-height: 0;
-  margin: 0 calc(-1 * var(--modal-padding, var(--inset-normal)));
-  margin-bottom: calc(-1 * var(--modal-padding, var(--inset-normal)));
-}
-
-.es-modal--interactive .es-elevation-modal__grid {
-  height: 100%;
-  gap: 0;
-}
-
-.es-modal--interactive .es-elevation-modal__column {
-  overflow-y: auto;
-  padding: var(--inset-open) var(--inset-spacious);
-}
-
-.es-modal--interactive .es-elevation-modal__column--scroll {
-  border-right: var(--border-subtle-shorthand);
-}
-
-/* ── Modal: control card ────────────────────────────────────────────── */
-
-.es-elevation-modal__card {
-  display: flex;
-  flex-direction: column;
-  gap: var(--sid-gap);
-  background: var(--sid-card-bg);
-  border: var(--sid-card-border);
-  border-radius: var(--sid-card-radius);
-  padding: var(--sid-padding);
 }

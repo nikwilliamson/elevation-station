@@ -6,7 +6,7 @@ const outputFile = 'tokens.css';
 
 // Dark / default build — :root
 const dark = new StyleDictionary({
-  source: ['tokens/*.json', 'tokens/components/*.json', 'src/components/**/*.tokens.json'],
+  source: ['tokens/*.json', 'tokens/components/*.json'],
   platforms: {
     css: {
       transformGroup: 'css',
@@ -27,7 +27,7 @@ const dark = new StyleDictionary({
 // `source` supplies only the overrides that differ.
 const light = new StyleDictionary({
   log: { warnings: 'disabled' },
-  include: ['tokens/*.json', 'tokens/components/*.json', 'src/components/**/*.tokens.json'],
+  include: ['tokens/*.json', 'tokens/components/*.json'],
   source: ['tokens/themes/light/**/*.json'],
   platforms: {
     css: {

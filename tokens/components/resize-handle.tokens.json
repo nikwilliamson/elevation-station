@@ -1,0 +1,10 @@
+{
+  "resize-handle": {
+    "width":        { "$value": ".75rem", "$type": "dimension" },
+    "margin":       { "$value": "0.5rem", "$type": "dimension" },
+    "line-width":   { "$value": "1px",    "$type": "dimension" },
+    "pill-width":   { "$value": "1rem",   "$type": "dimension" },
+    "pill-height":  { "$value": "4rem",   "$type": "dimension" },
+    "pill-radius":  { "$value": "1rem",   "$type": "dimension" }
+  }
+}

@@ -1,0 +1,7 @@
+{
+  "light-position-pad": {
+    "sun-size":   { "$value": "1rem",                                "$type": "dimension" },
+    "sun-border": { "$value": "2px",                                 "$type": "dimension" },
+    "sun-glow":   { "$value": "0 0 0 7px hsl(44deg 97% 47% / 15%)", "$type": "other" }
+  }
+}

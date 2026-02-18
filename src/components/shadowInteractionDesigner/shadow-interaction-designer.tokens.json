@@ -1,6 +1,0 @@
-{
-  "shadow-interaction-designer": {
-    "preview-min-height":   { "$value": "200px" },
-    "active-ring-width":    { "$value": "1px" }
-  }
-}

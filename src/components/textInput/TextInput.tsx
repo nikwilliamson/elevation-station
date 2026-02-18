@@ -29,7 +29,7 @@ export const TextInput = forwardRef<HTMLInputElement, TextInputProps>(
       label,
       description,
       hideLabel = false,
-      labelSize = "sm",
+      labelSize = "md",
       size = "md",
       emphasis = "high",
       mono = false,

@@ -107,6 +107,7 @@ export function ColorPicker({ value, onChange, disabled, label, description, hid
           onFocus={handleFocus}
           onBlur={commitValue}
           onKeyDown={handleKeyDown}
+          spellCheck={false}
           placeholder={colorFormat === "hex" ? "#000000" : colorFormat}
         />
       </div>

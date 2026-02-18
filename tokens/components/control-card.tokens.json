@@ -1,0 +1,5 @@
+{
+  "control-card": {
+    "gap": { "$value": "{gap.normal}", "$type": "dimension" }
+  }
+}

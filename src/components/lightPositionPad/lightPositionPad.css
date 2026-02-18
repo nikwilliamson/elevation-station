@@ -1,0 +1,50 @@
+/* ── Light Position Pad ──────────────────────────────────────────────── */
+
+.es-light-pad__wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: var(--gap-compact);
+}
+
+.es-light-pad {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 1;
+  border-radius: var(--radius-sm);
+  background:
+    repeating-linear-gradient(to right,
+      transparent 0 calc(25% - var(--border-default-width)),
+      var(--border-subtle) calc(25% - var(--border-default-width)) 25%),
+    repeating-linear-gradient(to bottom,
+      transparent 0 calc(25% - var(--border-default-width)),
+      var(--border-subtle) calc(25% - var(--border-default-width)) 25%),
+    var(--interactive-default);
+  background-size:
+    calc(100% + var(--border-default-width)) calc(100% + var(--border-default-width)),
+    calc(100% + var(--border-default-width)) calc(100% + var(--border-default-width)),
+    auto;
+  border: var(--border-default-width) solid var(--border-subtle);
+  overflow: hidden;
+  user-select: none;
+}
+
+.es-light-pad:focus-visible {
+  outline: 2px solid var(--color-brand-blue, #4158d0);
+  outline-offset: 2px;
+}
+
+.es-light-pad__sun {
+  position: absolute;
+  width: var(--light-position-pad-sun-size);
+  height: var(--light-position-pad-sun-size);
+  border-radius: 50%;
+  translate: -50% -50%;
+  background: var(--color-brand-yellow);
+  border: var(--light-position-pad-sun-border) solid var(--color-yellow-400);
+  pointer-events: none;
+  transition: box-shadow var(--motion-duration-fast) var(--motion-easing-standard);
+}
+
+.es-light-pad__sun[data-active] {
+  box-shadow: var(--light-position-pad-sun-glow);
+}

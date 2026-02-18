@@ -5,6 +5,7 @@
   inset: 0;
   z-index: var(--modal-z-index, 1000);
   background: rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(3px);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -12,7 +13,7 @@
 
 .es-modal {
   position: relative;
-  background: var(--surface-overlay);
+  background: var(--surface-primary);
   border: var(--border-default-width) solid var(--border-subtle);
   border-radius: var(--modal-radius, var(--radius-lg));
   padding: var(--modal-padding, var(--inset-normal));
@@ -25,6 +26,11 @@
   flex-direction: column;
   gap: var(--gap-normal);
   transform-style: preserve-3d;
+  interpolate-size: allow-keywords;
+  transition:
+    width 250ms linear(0, 1.1382, 0.9917, 0.997, 1.0015, 0.9996, 1, 1),
+    height 250ms linear(0, 1.1382, 0.9917, 0.997, 1.0015, 0.9996, 1, 1),
+    min-width 250ms linear(0, 1.1382, 0.9917, 0.997, 1.0015, 0.9996, 1, 1);
 }
 
 /* ── Header ──────────────────────────────────────────────────────────── */
@@ -73,4 +79,5 @@
   display: flex;
   flex-direction: column;
   gap: var(--gap-normal);
+  transition: margin 250ms linear(0, 1.1382, 0.9917, 0.997, 1.0015, 0.9996, 1, 1);
 }

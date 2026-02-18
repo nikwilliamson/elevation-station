@@ -9,7 +9,7 @@
 /* ── Tab area ─────────────────────────────────────────────────────── */
 
 .es-sidebar__tabs {
-  padding: var(--spg-padding-y) var(--spg-padding-x) 0;
+  padding: var(--es-app-padding-y) var(--es-app-padding-x) 0;
 }
 
 /* ── Views container (overflow-hidden for sliding effect) ─────────── */
@@ -44,7 +44,7 @@
   display: flex;
   flex-direction: column;
   gap: var(--gap-normal);
-  padding: var(--spg-padding-y) var(--spg-padding-x);
+  padding: var(--es-app-padding-y) var(--es-app-padding-x);
 }
 
 /* ── Header (title + optional control) ────────────────────────────── */
@@ -95,7 +95,7 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: var(--spg-padding-y) var(--spg-padding-x);
+    padding: var(--es-app-padding-y) var(--es-app-padding-x);
   }
 
   .es-sidebar__drawer-bar .es-title {

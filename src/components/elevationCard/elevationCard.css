@@ -1,15 +1,15 @@
 /* ── Elevation card ──────────────────────────────────────────────────── */
 
-.es-shadow-token-designer__elevation-card {
+.es-elevation-card__card {
   display: flex;
   flex-direction: var(--elevation-card-direction, column);
-  background: var(--spg-card-bg);
-  border: var(--spg-card-border);
-  border-radius: var(--spg-card-radius);
+  background: var(--es-app-card-bg);
+  border: var(--es-app-card-border);
+  border-radius: var(--es-app-card-radius);
   gap: var(--gap-normal);
 }
 
-.es-shadow-token-designer__elevation-content {
+.es-elevation-card__content {
   display: flex;
   flex-direction: column;
   gap: var(--gap-compact);
@@ -18,49 +18,49 @@
   min-width: var(--elevation-card-content-min-width, initial);
 }
 
-.es-shadow-token-designer__elevation-header {
+.es-elevation-card__header {
   display: flex;
   align-items: center;
   justify-content: space-between;
   gap: var(--gap-compact);
 }
 
-.es-shadow-token-designer__elevation-name {
+.es-elevation-card__name {
   font: var(--typography-400-semibold);
   color: var(--text-primary);
   padding: 0 var(--elevation-card-controls-padding-x);
 }
 
-.es-shadow-token-designer__elevation-actions {
+.es-elevation-card__actions {
   display: flex;
   align-items: center;
   gap: var(--gap-compact);
-  flex-shrink: 0;
+  padding: 0 var(--elevation-card-controls-padding-x);
 }
 
-.es-shadow-token-designer__elevation-meta {
+.es-elevation-card__meta {
   display: flex;
   gap: var(--gap-normal);
   padding: 0 var(--elevation-card-controls-padding-x);
 }
 
-.es-shadow-token-designer__elevation-meta-item {
+.es-elevation-card__meta-item {
   font: var(--typography-200-regular);
   color: var(--text-tertiary);
 }
 
-.es-shadow-token-designer__elevation-meta-value {
+.es-elevation-card__meta-value {
   font: var(--typography-200-regular-mono);
   color: var(--text-secondary);
 }
 
 /* ── Preview wrapper + badge ─────────────────────────────────────────── */
 
-.es-shadow-token-designer__elevation-preview-wrap {
+.es-elevation-card__preview-wrap {
   position: relative;
 }
 
-.es-shadow-token-designer__elevation-badge {
+.es-elevation-card__badge {
   position: absolute;
   top: var(--inset-compact);
   left: var(--inset-compact);
@@ -77,44 +77,44 @@
 
 /* ── Variants ───────────────────────────────────────────────────────── */
 
-.es-shadow-token-designer__elevation-card--grid {
+.es-elevation-card__card--grid {
   --elevation-card-direction: column;
   --elevation-card-content-flex: initial;
   --elevation-card-content-min-width: initial;
 }
 
-.es-shadow-token-designer__elevation-card--list {
+.es-elevation-card__card--list {
   --elevation-card-direction: row;
   --elevation-card-content-flex: 1;
   --elevation-card-content-min-width: 0;
 }
 
-.es-shadow-token-designer__elevation-card--list > .es-shadow-token-designer__elevation-preview-wrap {
+.es-elevation-card__card--list > .es-elevation-card__preview-wrap {
   width: var(--elevation-card-list-preview-width);
   flex-shrink: 0;
 }
 
-.es-shadow-token-designer__elevation-card--list > .es-shadow-token-designer__elevation-preview-wrap > .es-shadow-preview {
+.es-elevation-card__card--list > .es-elevation-card__preview-wrap > .es-shadow-preview {
   padding: var(--elevation-card-list-preview-padding);
 }
 
 /* ── Drawer variant (≤ 600px inside sidebar) ───────────────────────── */
 
 @media (max-width: 600px) {
-  .es-sidebar .es-shadow-token-designer__elevation-meta {
+  .es-sidebar .es-elevation-card__meta {
     display: none;
   }
 
-  .es-sidebar .es-shadow-token-designer__elevation-card {
+  .es-sidebar .es-elevation-card__card {
     flex-shrink: 0;
     flex-direction: column;
   }
 
-  .es-sidebar .es-shadow-token-designer__elevation-name {
+  .es-sidebar .es-elevation-card__name {
     font: var(--typography-200-semibold);
   }
 
-  .es-sidebar .es-shadow-token-designer__elevation-actions {
+  .es-sidebar .es-elevation-card__actions {
     display: none;
   }
 }

@@ -2,7 +2,7 @@ import React, { useCallback } from "react"
 
 import type { ElevationType, InteractionStateName } from "../../shared/defaults"
 import { Button } from "../button/Button"
-import { RemoveButton } from "../removeButton/RemoveButton"
+import { CopyButton } from "../copyButton/CopyButton"
 import { ShadowPreview } from "../shadowPreview/ShadowPreview"
 
 import "./elevationCard.css"
@@ -26,6 +26,7 @@ interface ElevationCardProps {
   componentBgHex?: string | Record<InteractionStateName, string>
   componentTextHex?: string | Record<InteractionStateName, string>
   enabledStates?: Record<InteractionStateName, boolean>
+  cssSnippet?: string
   preview: PreviewConfig
   variant?: ElevationCardVariant
   onEdit: (index: number) => void
@@ -45,6 +46,7 @@ export const ElevationCard = React.memo<ElevationCardProps>(
     interactiveColorHsls,
     componentBgHex,
     componentTextHex,
+    cssSnippet,
     enabledStates,
     preview,
     variant = "grid",
@@ -63,29 +65,35 @@ export const ElevationCard = React.memo<ElevationCardProps>(
     )
 
     return (
-      <div className={`es-shadow-token-designer__elevation-card es-shadow-token-designer__elevation-card--${variant}`}>
-        <div className="es-shadow-token-designer__elevation-content">
-          <div className="es-shadow-token-designer__elevation-header">
-            <span className="es-shadow-token-designer__elevation-name">{name}</span>
-            <div className="es-shadow-token-designer__elevation-actions">
-              <Button emphasis="low" size="xs" onClick={handleEdit}>edit</Button>
-              {canRemove && (
-                <RemoveButton label="Remove elevation" onClick={handleRemove} />
-              )}
-            </div>
+      <div className={`es-elevation-card__card es-elevation-card__card--${variant}`}>
+        <div className="es-elevation-card__content">
+          <div className="es-elevation-card__header">
+            <span className="es-elevation-card__name">{name}</span>
+            {canRemove && (
+              <Button icon emphasis="low" color="destructive" size="xs" aria-label="Remove elevation" onClick={handleRemove}>
+                <svg viewBox="0 0 256 256" fill="none" aria-hidden="true">
+                  <line x1="200" y1="56" x2="56" y2="200" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="24" />
+                  <line x1="200" y1="200" x2="56" y2="56" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="24" />
+                </svg>
+              </Button>
+            )}
           </div>
-          <div className="es-shadow-token-designer__elevation-meta">
-            <span className="es-shadow-token-designer__elevation-meta-item">
-              z-index: <span className="es-shadow-token-designer__elevation-meta-value">{zIndex}</span>
+          <div className="es-elevation-card__actions">
+            <Button emphasis="low" size="xs" onClick={handleEdit}>Edit</Button>
+            {cssSnippet && <CopyButton text={cssSnippet} emphasis="low" size="xs" />}
+          </div>
+          <div className="es-elevation-card__meta">
+            <span className="es-elevation-card__meta-item">
+              z-index: <span className="es-elevation-card__meta-value">{zIndex}</span>
             </span>
-            <span className="es-shadow-token-designer__elevation-meta-item">
-              depth: <span className="es-shadow-token-designer__elevation-meta-value">{depth.toFixed(2)}</span>
+            <span className="es-elevation-card__meta-item">
+              depth: <span className="es-elevation-card__meta-value">{depth.toFixed(2)}</span>
             </span>
           </div>
         </div>
-        <div className="es-shadow-token-designer__elevation-preview-wrap">
+        <div className="es-elevation-card__preview-wrap">
           {type === "interactive" && (
-            <span className="es-shadow-token-designer__elevation-badge">Interactive</span>
+            <span className="es-elevation-card__badge">Interactive</span>
           )}
           <ShadowPreview
             bgHex={preview.bgHex}

@@ -1,0 +1,73 @@
+/* ── Modal: 2-column grid ──────────────────────────────────────────── */
+
+.es-elevation-modal__grid {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  gap: var(--gap-normal);
+  transition: gap 250ms linear(0, 1.1382, 0.9917, 0.997, 1.0015, 0.9996, 1, 1),
+              height 250ms linear(0, 1.1382, 0.9917, 0.997, 1.0015, 0.9996, 1, 1);
+}
+
+.es-elevation-modal__column {
+  display: flex;
+  flex-direction: column;
+  gap: var(--gap-normal);
+  transition: padding 250ms linear(0, 1.1382, 0.9917, 0.997, 1.0015, 0.9996, 1, 1);
+}
+
+.es-elevation-modal__column--scroll {
+  overflow-y: auto;
+}
+
+/* Prevent tab wrapping during grid column animation */
+.es-elevation-modal__grid .es-tab-select__list {
+  flex-wrap: nowrap;
+}
+
+/* ── Modal: static sizing ────────────────────────────────────────────── */
+
+.es-modal:not(.es-modal--interactive) {
+  --state-panel-gap: var(--gap-normal);
+  --state-panel-padding: var(--inset-spacious);
+  --state-panel-card-radius: var(--radius-md);
+  --state-panel-card-bg: var(--interactive-default);
+  --state-panel-card-border: var(--border-subtle-shorthand);
+
+  min-width: 680px;
+}
+
+/* ── Modal: interactive sizing ───────────────────────────────────────── */
+
+.es-modal--interactive {
+  --state-panel-gap: var(--gap-normal);
+  --state-panel-padding: var(--inset-spacious);
+  --state-panel-card-radius: var(--radius-md);
+  --state-panel-card-bg: var(--interactive-default);
+  --state-panel-card-border: var(--border-subtle-shorthand);
+
+  width: 80vw;
+  max-width: 80vw;
+  max-height: 80vh;
+  overflow: hidden;
+}
+
+.es-modal--interactive > .es-modal__body {
+  flex: 1;
+  min-height: 0;
+  margin: 0 calc(-1 * var(--modal-padding, var(--inset-normal)));
+  margin-bottom: calc(-1 * var(--modal-padding, var(--inset-normal)));
+}
+
+.es-modal--interactive .es-elevation-modal__grid {
+  height: 100%;
+  gap: 0;
+}
+
+.es-modal--interactive .es-elevation-modal__column {
+  overflow-y: auto;
+  padding: var(--inset-open) var(--inset-spacious);
+}
+
+.es-modal--interactive .es-elevation-modal__column--scroll {
+  border-right: var(--border-subtle-shorthand);
+}

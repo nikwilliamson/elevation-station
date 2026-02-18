@@ -30,14 +30,14 @@ export interface EngineControlsProps {
 
 export function EngineControls({ engine, onEngineChange }: EngineControlsProps) {
   return (
-    <div className="es-shadow-token-designer__panel">
+    <>
       {ENGINE_SLIDERS.map((slider) => (
-        <ControlSlider key={slider.key} label={slider.label} description={slider.description} size="sm" value={engine[slider.key] as number} min={slider.min} max={slider.max} step={slider.step} onChange={(v) => onEngineChange(slider.key, v)} />
+        <ControlSlider key={slider.key} label={slider.label} description={slider.description} size="md" value={engine[slider.key] as number} min={slider.min} max={slider.max} step={slider.step} onChange={(v) => onEngineChange(slider.key, v)} />
       ))}
-      <div>
-        <FieldLabel size="sm" label="Resolution" />
+      <div className="es-shadow-token-designer__slider-group">
+        <FieldLabel size="md" label="Resolution" description="Number of shadow layers to render" />
         <TabSelect options={LAYER_COUNT_OPTIONS} value={engine.layerCount} onChange={(v) => onEngineChange("layerCount", v)} layoutId="engine-layer-count" ariaLabel="Layer count" />
       </div>
-    </div>
+    </>
   )
 }

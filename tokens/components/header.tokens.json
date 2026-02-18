@@ -1,0 +1,6 @@
+{
+  "header": {
+    "border-width": { "$value": "1px",    "$type": "dimension" },
+    "logo-height":  { "$value": "1.5rem", "$type": "dimension" }
+  }
+}

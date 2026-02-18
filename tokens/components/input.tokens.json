@@ -1,0 +1,36 @@
+{
+  "input": {
+    "bg":              { "$value": "{color.neutral.1100}", "$type": "color" },
+    "border-color":       { "$value": "{border.default}",    "$type": "color" },
+    "border-color-hover": { "$value": "{border.strong}",     "$type": "color" },
+    "border-color-focus": { "$value": "{color.brand.blue}",  "$type": "color" },
+    "spacing-xs-x":    { "$value": "0.5rem",   "$type": "dimension" },
+    "spacing-xs-y":    { "$value": "0.125rem",  "$type": "dimension" },
+    "spacing-sm-x":    { "$value": "0.5rem",  "$type": "dimension" },
+    "spacing-sm-y":    { "$value": "0.375rem",  "$type": "dimension" },
+    "spacing-md-x":    { "$value": "0.75rem",     "$type": "dimension" },
+    "spacing-md-y":    { "$value": "0.625rem", "$type": "dimension" },
+    "spacing-lg-x":    { "$value": "1.5rem",   "$type": "dimension" },
+    "spacing-lg-y":    { "$value": "1rem",     "$type": "dimension" },
+    "typography-xs":       { "$value": "{typography.200-regular}",      "$type": "other" },
+    "typography-xs-mono":  { "$value": "{typography.200-regular-mono}", "$type": "other" },
+    "typography-xs-bold":  { "$value": "{typography.200-bold}",         "$type": "other" },
+    "typography-sm":       { "$value": "{typography.200-regular}",      "$type": "other" },
+    "typography-sm-mono":  { "$value": "{typography.200-regular-mono}", "$type": "other" },
+    "typography-sm-bold":  { "$value": "{typography.200-bold}",         "$type": "other" },
+    "typography-md":       { "$value": "{typography.400-regular}",      "$type": "other" },
+    "typography-md-mono":  { "$value": "{typography.400-regular-mono}", "$type": "other" },
+    "typography-md-bold":  { "$value": "{typography.400-bold}",         "$type": "other" },
+    "typography-lg":       { "$value": "{typography.500-regular}",      "$type": "other" },
+    "typography-lg-mono":  { "$value": "{typography.500-regular-mono}", "$type": "other" },
+    "typography-lg-bold":  { "$value": "{typography.500-bold}",         "$type": "other" },
+    "radius-xs":           { "$value": "{radius.xs}", "$type": "dimension" },
+    "radius-sm":           { "$value": "{radius.xs}", "$type": "dimension" },
+    "radius-md":           { "$value": "{radius.xs}", "$type": "dimension" },
+    "radius-lg":           { "$value": "{radius.sm}",  "$type": "dimension" }
+  },
+  "input-group": {
+    "vertical-gap":   { "$value": "{gap.compact}", "$type": "dimension" },
+    "horizontal-gap": { "$value": "{gap.dense}",   "$type": "dimension" }
+  }
+}

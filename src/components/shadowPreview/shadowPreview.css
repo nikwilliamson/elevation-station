@@ -6,14 +6,14 @@
   align-items: center;
   gap: var(--gap-normal);
   padding: 25%;
-  border-radius: var(--spg-card-radius);
+  border-radius: var(--es-app-card-radius);
   transition: background-color var(--motion-duration-standard) var(--motion-easing-standard);
 }
 
 .es-shadow-preview__card {
   width: 100%;
   aspect-ratio: 1;
-  border-radius: var(--spg-card-radius);
+  border-radius: var(--es-app-card-radius);
   transition: box-shadow var(--motion-duration-standard) var(--motion-easing-standard),
     background-color var(--motion-duration-standard) var(--motion-easing-standard);
   will-change: box-shadow;
@@ -33,8 +33,8 @@
 
 .es-shadow-preview--button.es-shadow-preview--panel {
   padding: var(--inset-generous);
-  border-radius: var(--sid-card-radius);
-  border: var(--sid-card-border);
+  border-radius: var(--state-panel-card-radius);
+  border: var(--state-panel-card-border);
   min-height: var(--shadow-interaction-designer-preview-min-height);
 }
 

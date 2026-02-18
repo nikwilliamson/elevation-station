@@ -1,0 +1,10 @@
+{
+  "tab-select": {
+    "padding":                  { "$value": "3px", "$type": "dimension" },
+    "gap":                      { "$value": "2px", "$type": "dimension" },
+    "sm-padding-x":             { "$value": "8px", "$type": "dimension" },
+    "sm-padding-y":             { "$value": "4px", "$type": "dimension" },
+    "border-variant-width":     { "$value": "4px", "$type": "dimension" },
+    "border-indicator-height":  { "$value": "4px", "$type": "dimension" }
+  }
+}

@@ -1,0 +1,25 @@
+{
+  "button": {
+    "spacing-xs-x":   { "$value": "8px",      "$type": "dimension" },
+    "spacing-xs-y":   { "$value": "4px",      "$type": "dimension" },
+    "spacing-sm-x":   { "$value": "0.75rem",  "$type": "dimension" },
+    "spacing-sm-y":   { "$value": "0.25rem",  "$type": "dimension" },
+    "spacing-md-x":   { "$value": "1rem",     "$type": "dimension" },
+    "spacing-md-y":   { "$value": "0.625rem", "$type": "dimension" },
+    "spacing-lg-x":   { "$value": "1.5rem",   "$type": "dimension" },
+    "spacing-lg-y":   { "$value": "1rem",     "$type": "dimension" },
+    "typography-sm":   { "$value": "{typography.300-semibold}",  "$type": "other" },
+    "typography-md":   { "$value": "{typography.400-semibold}", "$type": "other" },
+    "typography-lg":   { "$value": "{typography.500-semibold}", "$type": "other" },
+    "radius-sm":       { "$value": "{radius.xs}", "$type": "dimension" },
+    "radius-md":       { "$value": "{radius.xs}", "$type": "dimension" },
+    "radius-lg":       { "$value": "{radius.sm}", "$type": "dimension" },
+    "focus-ring-width":  { "$value": "{focus.ring-width}", "$type": "dimension" },
+    "focus-ring-offset": { "$value": "{focus.ring-offset}", "$type": "dimension" },
+    "icon-size-xs":      { "$value": "1.25rem", "$type": "dimension" },
+    "icon-size-sm":      { "$value": "2rem",    "$type": "dimension" },
+    "icon-size-md":      { "$value": "2.5rem",  "$type": "dimension" },
+    "icon-size-lg":      { "$value": "3rem",    "$type": "dimension" },
+    "icon-scale":        { "$value": "60%",     "$type": "other" }
+  }
+}

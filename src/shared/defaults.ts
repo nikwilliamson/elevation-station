@@ -17,6 +17,8 @@ export interface EngineParams {
 export type ElevationType = 'static' | 'interactive';
 export type InteractionStateName = 'default' | 'hover' | 'active';
 
+export const INTERACTION_STATE_NAMES: InteractionStateName[] = ['default', 'hover', 'active'];
+
 export interface InteractionStateConfig {
   intensity: number;
   hardness: number;
@@ -113,30 +115,30 @@ export const DEFAULTS: PaletteState = {
   },
   elevations: [
     { name: 'surface',
-      depth: 0.15,
+      depth: 0.12,
       zIndex: 1,
       type: 'interactive',
       enabledStates: { default: true, hover: true, active: true },
       interactionStates: {
-        default: { depth: 0.15, intensity: 0.30, hardness: 0.30, shadowColorHex: '#170a32', accentColorHex: '#101756', componentBgHex: '#4158d0', componentTextHex: '#ffffff' },
-        hover:   { depth: 0.45, intensity: 0.40, hardness: 0.25, shadowColorHex: '#170a32', accentColorHex: '#101756', componentBgHex: '#2c3ab4', componentTextHex: '#ffffff' },
-        active:  { depth: 0.20, intensity: 0.20, hardness: 0.40, shadowColorHex: '#170a32', accentColorHex: '#101756', componentBgHex: '#2c3ab4', componentTextHex: '#ffffff' },
+        default: { depth: 0.12, intensity: 0.24, hardness: 0.32, shadowColorHex: '#170a32', accentColorHex: '#101756', componentBgHex: '#4158d0', componentTextHex: '#ffffff' },
+        hover:   { depth: 0.48, intensity: 0.48, hardness: 0.24, shadowColorHex: '#170a32', accentColorHex: '#101756', componentBgHex: '#2c3ab4', componentTextHex: '#ffffff' },
+        active:  { depth: 0.24, intensity: 0.24, hardness: 0.40, shadowColorHex: '#170a32', accentColorHex: '#101756', componentBgHex: '#2c3ab4', componentTextHex: '#ffffff' },
       }, },
-    { name: 'raised', depth: 0.25, zIndex: 2, type: 'static' },
-    { name: 'elevated', depth: 0.35, zIndex: 3, type: 'static' },
+    { name: 'raised', depth: 0.24, zIndex: 2, type: 'static' },
+    { name: 'elevated', depth: 0.32, zIndex: 3, type: 'static' },
     { name: 'sticky',
-      depth: 0.45,
+      depth: 0.24,
       zIndex: 100,
       type: 'interactive',
       enabledStates: { default: true, hover: false, active: true },
       interactionStates: {
-        default: { depth: 0.15, intensity: 0.30, hardness: 0.30, shadowColorHex: '#170a32', accentColorHex: '#101756', componentBgHex: '#ffffff', componentTextHex: '#ffffff' },
-        hover:   { depth: 0.45, intensity: 0.48, hardness: 0.24, shadowColorHex: '#170a32', accentColorHex: '#101756', componentBgHex: '#ffffff', componentTextHex: '#ffffff' },
-        active:  { depth: 0.65, intensity: 0.65, hardness: 0.65, shadowColorHex: '#170a32', accentColorHex: '#101756', componentBgHex: '#ffffff', componentTextHex: '#ffffff' },
+        default: { depth: 0.24, intensity: 0.00, hardness: 1.00, shadowColorHex: '#170a32', accentColorHex: '#101756', componentBgHex: '#ffffff', componentTextHex: '#ffffff' },
+        hover:   { depth: 0.48, intensity: 0.48, hardness: 0.24, shadowColorHex: '#170a32', accentColorHex: '#101756', componentBgHex: '#ffffff', componentTextHex: '#ffffff' },
+        active:  { depth: 0.32, intensity: 0.64, hardness: 0.80, shadowColorHex: '#170a32', accentColorHex: '#101756', componentBgHex: '#ffffff', componentTextHex: '#ffffff' },
       }, },
-    { name: 'overlay', depth: 0.55, zIndex: 200, type: 'static' },
-    { name: 'modal', depth: 0.65, zIndex: 300, type: 'static' },
-    { name: 'floating', depth: 0.75, zIndex: 400, type: 'static' },
+    { name: 'overlay', depth: 0.56, zIndex: 200, type: 'static' },
+    { name: 'modal', depth: 0.66, zIndex: 300, type: 'static' },
+    { name: 'floating', depth: 0.72, zIndex: 400, type: 'static' },
   ],
   curves: {
     layerDistribution: resolvePreset(DEFAULT_CURVES.layerDistribution),

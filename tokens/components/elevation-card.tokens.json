@@ -1,0 +1,9 @@
+{
+  "elevation-card": {
+    "padding":              { "$value": "0.25rem",     "$type": "dimension" },
+    "controls-gap":         { "$value": "{gap.normal}", "$type": "dimension" },
+    "controls-padding-x":   { "$value": "0.75rem",     "$type": "dimension" },
+    "list-preview-width":   { "$value": "140px",        "$type": "dimension" },
+    "list-preview-padding": { "$value": "20px",         "$type": "dimension" }
+  }
+}

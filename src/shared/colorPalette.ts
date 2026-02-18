@@ -4,7 +4,7 @@ export type ColorFormat = 'hex' | 'rgb' | 'lch' | 'oklch';
 
 // ── Format display ──────────────────────────────────────────────────
 
-function hexToRgbValues(hex: string): [number, number, number] {
+export function hexToRgbValues(hex: string): [number, number, number] {
   const n = parseInt(hex.slice(1), 16);
   return [(n >> 16) & 255, (n >> 8) & 255, n & 255];
 }
@@ -13,7 +13,7 @@ function linearize(c: number): number {
   return c <= 0.04045 ? c / 12.92 : ((c + 0.055) / 1.055) ** 2.4;
 }
 
-function hexToOklch(hex: string): [number, number, number] {
+export function hexToOklch(hex: string): [number, number, number] {
   const [r, g, b] = hexToRgbValues(hex).map((v) => linearize(v / 255));
   // sRGB linear → OKLab
   const l_ = 0.4122214708 * r + 0.5363325363 * g + 0.0514459929 * b;
@@ -31,7 +31,7 @@ function hexToOklch(hex: string): [number, number, number] {
   return [L, C, H];
 }
 
-function hexToLch(hex: string): [number, number, number] {
+export function hexToLch(hex: string): [number, number, number] {
   const [r, g, b] = hexToRgbValues(hex).map((v) => linearize(v / 255));
   // sRGB linear → XYZ (D65)
   const x = 0.4124564 * r + 0.3575761 * g + 0.1804375 * b;
@@ -432,4 +432,54 @@ for (const family of COLOR_PALETTE) {
 
 export function resolveHsl(hex: string): string {
   return COLOR_HSL_MAP.get(hex) ?? hexToHsl(hex);
+}
+
+// ── DTCG color object ─────────────────────────────────────────────────
+
+export interface DtcgColor {
+  colorSpace: string;
+  components: [number, number, number];
+  alpha: number;
+  hex: string;
+}
+
+function round3(n: number): number {
+  return Math.round(n * 1000) / 1000;
+}
+
+function round1f(n: number): number {
+  return Math.round(n * 10) / 10;
+}
+
+export function hexToDtcgColor(hex: string, alpha: number, format: ColorFormat): DtcgColor {
+  switch (format) {
+    case 'lch': {
+      const [L, C, H] = hexToLch(hex);
+      return {
+        colorSpace: 'lch',
+        components: [round1f(L), round1f(C), round1f(H)],
+        alpha: round3(alpha),
+        hex,
+      };
+    }
+    case 'oklch': {
+      const [L, C, H] = hexToOklch(hex);
+      return {
+        colorSpace: 'oklch',
+        components: [round3(L), round3(C), round1f(H)],
+        alpha: round3(alpha),
+        hex,
+      };
+    }
+    default: {
+      // hex and rgb both use srgb with 0-1 floats
+      const [r, g, b] = hexToRgbValues(hex);
+      return {
+        colorSpace: 'srgb',
+        components: [round3(r / 255), round3(g / 255), round3(b / 255)],
+        alpha: round3(alpha),
+        hex,
+      };
+    }
+  }
 }

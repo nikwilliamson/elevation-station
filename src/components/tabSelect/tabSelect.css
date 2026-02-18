@@ -1,9 +1,9 @@
 /* ── Tab Select ──────────────────────────────────────────────────────── */
 
 .es-tab-select {
-  background: var(--surface-sunken);
+  background: var(--input-bg);
   border-radius: var(--radius-md);
-  border: var(--border-default-width) solid var(--border-subtle);
+  border: var(--border-default-width) solid var(--input-border-color);
   padding: var(--tab-select-padding);
 }
 

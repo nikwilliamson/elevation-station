@@ -4,6 +4,8 @@ import { motion, useMotionValue, useSpring, useTransform } from "motion/react"
 
 import { Legend } from "../legend/Legend"
 
+import "./lightPositionPad.css"
+
 /* ── Types ─────────────────────────────────────────────────────── */
 
 export interface LightPositionPadProps {
@@ -84,11 +86,41 @@ export function LightPositionPad({ lightX, lightY, onChangeX, onChangeY }: Light
     sunScale.set(1)
   }, [sunScale])
 
+  const handleKeyDown = useCallback(
+    (e: React.KeyboardEvent) => {
+      const step = e.shiftKey ? 0.1 : 0.01
+      let nx = lightX
+      let ny = lightY
+      switch (e.key) {
+        case "ArrowLeft":
+          nx = Math.round(Math.max(-1, lightX - step) * 100) / 100
+          break
+        case "ArrowRight":
+          nx = Math.round(Math.min(1, lightX + step) * 100) / 100
+          break
+        case "ArrowUp":
+          ny = Math.round(Math.min(1, lightY + step) * 100) / 100
+          break
+        case "ArrowDown":
+          ny = Math.round(Math.max(-1, lightY - step) * 100) / 100
+          break
+        default:
+          return
+      }
+      e.preventDefault()
+      rawX.set(nx)
+      rawY.set(ny)
+      if (nx !== lightX) onChangeX(nx)
+      if (ny !== lightY) onChangeY(ny)
+    },
+    [lightX, lightY, onChangeX, onChangeY, rawX, rawY],
+  )
+
   return (
-    <div className="es-shadow-token-designer__light-pad-wrapper">
-      <div ref={padRef} className="es-shadow-token-designer__light-pad" style={{ cursor: dragging ? "grabbing" : "crosshair" }} onPointerDown={handlePointerDown} onPointerMove={handlePointerMove} onPointerUp={handlePointerUp}>
+    <div className="es-light-pad__wrapper">
+      <div ref={padRef} className="es-light-pad" style={{ cursor: dragging ? "grabbing" : "crosshair" }} tabIndex={0} role="slider" aria-label="Light position" aria-valuetext={`x: ${lightX.toFixed(2)}, y: ${lightY.toFixed(2)}`} onPointerDown={handlePointerDown} onPointerMove={handlePointerMove} onPointerUp={handlePointerUp} onKeyDown={handleKeyDown}>
         {/* Sun indicator — spring-animated position + scale */}
-        <motion.div className="es-shadow-token-designer__light-pad-sun" data-active={dragging || undefined} style={{ left: x, top: y, scale: sunScale }} />
+        <motion.div className="es-light-pad__sun" data-active={dragging || undefined} style={{ left: x, top: y, scale: sunScale }} />
         <Legend
           items={[
             { label: "x", value: lightX.toFixed(2) },

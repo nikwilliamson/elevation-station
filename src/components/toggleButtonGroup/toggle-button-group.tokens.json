@@ -1,5 +1,0 @@
-{
-  "toggle-button-group": {
-    "segmented-gap": { "$value": "1px" }
-  }
-}

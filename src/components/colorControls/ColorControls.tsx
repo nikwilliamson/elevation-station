@@ -21,19 +21,19 @@ export interface ColorControlsProps {
 
 export function ColorControls({ colorFormat, onColorFormatChange, shadowColorHex, accentColorHex, onColorChange, onAccentColorChange }: ColorControlsProps) {
   return (
-    <div className="es-shadow-token-designer__panel">
+    <>
       <div className="es-shadow-token-designer__slider-group">
-        <FieldLabel label="Color Format" description="Output format for color values" size="sm" />
+        <FieldLabel label="Color Format" description="Output format for color values" size="md" />
         <TabSelect options={COLOR_FORMATS} value={colorFormat} onChange={onColorFormatChange} layoutId="color-format-tabs" ariaLabel="Color format" />
       </div>
       <div className="es-shadow-token-designer__slider-group">
-        <ColorPicker label="Shadow Color" description="Base color for inner shadow layers" labelSize="sm" value={shadowColorHex} onChange={onColorChange} />
+        <ColorPicker label="Shadow Color" description="Base color for inner shadow layers" labelSize="md" value={shadowColorHex} onChange={onColorChange} />
       </div>
       <div className="es-shadow-token-designer__slider-group">
         <ColorPicker
           label="Accent Color (glow)"
           description="Color for outer atmospheric layers"
-          labelSize="sm"
+          labelSize="md"
           value={accentColorHex ?? shadowColorHex}
           onChange={(hex) => onAccentColorChange(hex)}
           disabled={!accentColorHex}
@@ -41,6 +41,6 @@ export function ColorControls({ colorFormat, onColorFormatChange, shadowColorHex
           onToggleChange={(v) => onAccentColorChange(v === "on" ? shadowColorHex : null)}
         />
       </div>
-    </div>
+    </>
   )
 }

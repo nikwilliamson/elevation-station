@@ -10,17 +10,22 @@
 /* ── Closed-state field row ─────────────────────────────────────────── */
 
 .es-color-picker__field {
+  position: relative;
   display: flex;
   align-items: center;
-  gap: var(--gap-compact);
 }
 
-/* ── Swatch trigger ─────────────────────────────────────────────────── */
+/* ── Swatch trigger (inside the input) ─────────────────────────────── */
 
 .es-color-picker__swatch {
+  position: absolute;
+  top: 50%;
+  left: var(--input-spacing-sm-y);
+  transform: translateY(-50%);
+  z-index: 1;
   width: var(--color-picker-swatch-size);
   height: var(--color-picker-swatch-size);
-  border-radius: var(--radius-sm);
+  border-radius: var(--radius-xs);
   border: var(--border-default-width) solid var(--border-default);
   padding: 0;
   cursor: pointer;
@@ -44,6 +49,10 @@
 .es-color-picker__input {
   flex: 1;
   max-width: var(--color-picker-input-max-width);
+}
+
+.es-color-picker__input .es-input {
+  padding-left: calc(var(--input-spacing-sm-y) + var(--color-picker-swatch-size) + var(--input-spacing-sm-x));
 }
 
 /* ── Popover ────────────────────────────────────────────────────────── */

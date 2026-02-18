@@ -1,0 +1,19 @@
+{
+  "switch": {
+    "track-width":       { "$value": "2.25rem",   "$type": "dimension" },
+    "track-height":      { "$value": "1.25rem",   "$type": "dimension" },
+    "track-radius":      { "$value": "1rem",      "$type": "dimension" },
+    "thumb-size":        { "$value": "0.875rem",   "$type": "dimension" },
+    "thumb-offset":      { "$value": "0.1875rem",  "$type": "dimension" },
+    "thumb-travel":      { "$value": "1rem",       "$type": "dimension" },
+    "focus-ring-width":  { "$value": "{focus.ring-width}",  "$type": "dimension" },
+    "focus-ring-offset": { "$value": "{focus.ring-offset}", "$type": "dimension" },
+
+    "sm-track-width":    { "$value": "1.75rem",   "$type": "dimension" },
+    "sm-track-height":   { "$value": "1rem",      "$type": "dimension" },
+    "sm-track-radius":   { "$value": "0.5rem",    "$type": "dimension" },
+    "sm-thumb-size":     { "$value": "0.625rem",  "$type": "dimension" },
+    "sm-thumb-offset":   { "$value": "0.1875rem", "$type": "dimension" },
+    "sm-thumb-travel":   { "$value": "0.75rem",   "$type": "dimension" }
+  }
+}

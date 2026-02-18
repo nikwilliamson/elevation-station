@@ -46,9 +46,11 @@
     "color":   { "$value": "rgba(0, 0, 0, 0.12)" },
     "popover": { "$value": "0 8px 24px rgba(0, 0, 0, 0.12)" }
   },
+  "input": {
+    "bg": { "$value": "{color.neutral.0}" }
+  },
   "selection": {
     "bg":   { "$value": "{color.brand.yellow}" },
     "text": { "$value": "{color.brand.white}" }
-  },
-  "border-subtle-shorthand": { "$value": "0.5px solid oklch(88.5% 0.036 293)" }
+  }
 }

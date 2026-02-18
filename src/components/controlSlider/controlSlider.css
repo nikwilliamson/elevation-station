@@ -33,7 +33,7 @@
 .es-control-slider__input::-webkit-slider-thumb {
   -webkit-appearance: none;
   appearance: none;
-  width: var(--dimension-300);
+  width: var(--control-slider-track-height);
   height: var(--control-slider-height);
   border-radius: var(--radius-xs);
   background: var(--color-brand-blue);
@@ -48,7 +48,7 @@
 }
 
 .es-control-slider__input::-moz-range-thumb {
-  width: var(--dimension-300);
+  width: var(--control-slider-track-height);
   height: var(--control-slider-height);
   border-radius: var(--radius-xs);
   background: var(--color-brand-blue);

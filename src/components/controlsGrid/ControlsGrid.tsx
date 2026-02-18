@@ -2,8 +2,8 @@ import { useMemo } from "react"
 
 import { BezierCurveEditor } from "../bezierCurveEditor/BezierCurveEditor"
 import { ColorControls, type ColorControlsProps } from "../colorControls/ColorControls"
+import { ControlCard } from "../controlCard/ControlCard"
 import { EngineControls, type EngineControlsProps } from "../engineControls/EngineControls"
-import { FieldLabel } from "../fieldLabel/FieldLabel"
 import { LightPositionPad } from "../lightPositionPad/LightPositionPad"
 import type { CurvePoint } from "../../shared/curvePresets"
 import type { ShadowCurves } from "../../shared/defaults"
@@ -37,27 +37,20 @@ export function ControlsGrid({ curves, onCurveChange, engine, onEngineChange, co
 
   return (
     <div className="es-shadow-token-designer__controls-grid">
-      <div className="es-shadow-token-designer__controls-grid-cell">
-        <FieldLabel label="Shadow Engine" description="Core parameters that shape the shadow output" />
+      <ControlCard title="Shadow Engine" description="Core parameters that shape the shadow output" size="lg">
         <EngineControls engine={engine} onEngineChange={onEngineChange} />
-      </div>
-      {/* Light position */}
-      <div className="es-shadow-token-designer__controls-grid-cell">
-        <FieldLabel label="Light Position" description="Where the light source is relative to the surface" />
+      </ControlCard>
+      <ControlCard title="Light Position" description="Where the light source is relative to the surface" size="lg">
         <LightPositionPad lightX={engine.lightX} lightY={engine.lightY} onChangeX={(v) => onEngineChange("lightX", v)} onChangeY={(v) => onEngineChange("lightY", v)} />
-      </div>
-      {/* Color controls */}
-      <div className="es-shadow-token-designer__controls-grid-cell">
-        <FieldLabel label="Color" description="Shadow and accent color configuration" />
+      </ControlCard>
+      <ControlCard title="Color" description="Shadow and accent color configuration" size="lg">
         <ColorControls colorFormat={colorFormat} onColorFormatChange={onColorFormatChange} shadowColorHex={shadowColorHex} accentColorHex={accentColorHex} onColorChange={onColorChange} onAccentColorChange={onAccentColorChange} />
-      </div>
+      </ControlCard>
 
-      {/* Curve editors */}
       {CURVE_EDITORS.map(({ label, description, key, color, axisLabels }) => (
-        <div key={key} className="es-shadow-token-designer__controls-grid-cell">
-          <FieldLabel label={label} description={description} />
+        <ControlCard key={key} title={label} description={description} size="lg">
           <BezierCurveEditor points={curves[key] ?? []} onChange={handlers[key]} color={color} label={label} xGridLines={key === "offsetGrowth" ? offsetGrowthMarkers : undefined} axisLabels={axisLabels} />
-        </div>
+        </ControlCard>
       ))}
     </div>
   )

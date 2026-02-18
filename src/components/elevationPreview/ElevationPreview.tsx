@@ -1,17 +1,14 @@
-import React, { useCallback, useState } from "react"
+import React, { useCallback, useMemo, useState } from "react"
 import { LayoutGroup, motion } from "motion/react"
 
 import type { ElevationType, InteractionStateName, InteractionStateConfig, LayerCount, PreviewLayout } from "../../shared/defaults"
+import { INTERACTION_STATE_NAMES } from "../../shared/defaults"
+import { sanitiseCssName } from "../../shared/sanitiseCssName"
 import { ColorPicker } from "../colorPicker/ColorPicker"
-import { ControlSlider } from "../controlSlider/ControlSlider"
-import { Divider } from "../divider/Divider"
 import { ElevationCard } from "../elevationCard/ElevationCard"
-import { FieldLabel } from "../fieldLabel/FieldLabel"
+import { ElevationEditModal } from "../elevationEditModal/ElevationEditModal"
 import { Modal } from "../modal/Modal"
-import { ShadowPreview } from "../shadowPreview/ShadowPreview"
-import { StatePanel } from "../statePanel/StatePanel"
 import { TabSelect } from "../tabSelect/TabSelect"
-import { TextInput } from "../textInput/TextInput"
 
 import "./elevationPreview.css"
 
@@ -39,89 +36,13 @@ const PREVIEW_FIELDS: { label: string; key: keyof PreviewConfig }[] = [
 
 function PreviewColors({ preview, onPreviewChange }: { preview: PreviewConfig; onPreviewChange: (key: keyof PreviewConfig, hex: string) => void }) {
   return (
-    <div className="es-shadow-token-designer__preview-colors">
+    <div className="es-elevation-preview__colors">
       {PREVIEW_FIELDS.map(({ label, key }) => (
         <div key={key} className="es-shadow-token-designer__slider-group">
-          <ColorPicker label={label} labelSize="sm" value={preview[key]} onChange={(hex) => onPreviewChange(key, hex)} />
+          <ColorPicker label={label} labelSize="md" value={preview[key]} onChange={(hex) => onPreviewChange(key, hex)} />
         </div>
       ))}
     </div>
-  )
-}
-
-/* ── ElevationTokenFields ────────────────────────────────────────── */
-
-interface ElevationTokenFieldsProps {
-  editingIndex: number
-  editingLevel: ElevationLevel
-  showDepth?: boolean
-  onTypeChange: (index: number, type: ElevationType) => void
-  onNameChange: (index: number, name: string) => void
-  onZIndexChange: (index: number, zIndex: number) => void
-  onLayerCountChange: (index: number, layerCount: LayerCount | undefined) => void
-  onDepthChange?: (index: number, depth: number) => void
-}
-
-function ElevationTokenFields({ editingIndex, editingLevel, showDepth, onTypeChange, onNameChange, onZIndexChange, onLayerCountChange, onDepthChange }: ElevationTokenFieldsProps) {
-  return (
-    <>
-      <div>
-        <FieldLabel size="sm" label="Type" />
-        <TabSelect
-          options={TYPE_OPTIONS}
-          value={editingLevel.type}
-          onChange={(type) => onTypeChange(editingIndex, type)}
-          layoutId="elevation-type"
-          size="md"
-          ariaLabel="Elevation type"
-        />
-      </div>
-      <TextInput
-        label="Name"
-        size="sm"
-        emphasis="high"
-        value={editingLevel.name}
-        onChange={(e) => onNameChange(editingIndex, e.target.value)}
-        spellCheck={false}
-      />
-      <TextInput
-        label="z-index"
-        type="number"
-        size="sm"
-        emphasis="high"
-        mono
-        min={0}
-        max={9999}
-        step={1}
-        value={editingLevel.zIndex}
-        onChange={(e) => {
-          const v = Math.round(Number(e.target.value))
-          if (!Number.isNaN(v))
-            onZIndexChange(editingIndex, Math.min(9999, Math.max(0, v)))
-        }}
-      />
-      <div>
-        <FieldLabel size="sm" label="Resolution" />
-        <TabSelect
-          options={LAYER_COUNT_OPTIONS}
-          value={editingLevel.layerCount?.toString() ?? "global"}
-          onChange={(v) => onLayerCountChange(editingIndex, v === "global" ? undefined : (Number(v) as LayerCount))}
-          layoutId="elevation-layer-count"
-          ariaLabel="Layer count"
-        />
-      </div>
-      {showDepth && onDepthChange && (
-        <ControlSlider
-          label="Depth"
-          size="sm"
-          value={editingLevel.depth}
-          min={0}
-          max={1}
-          step={0.01}
-          onChange={(d) => onDepthChange(editingIndex, d)}
-        />
-      )}
-    </>
   )
 }
 
@@ -132,20 +53,6 @@ export type { PreviewLayout }
 const LAYOUT_OPTIONS: { label: string; value: PreviewLayout }[] = [
   { label: "List", value: "list" },
   { label: "Grid", value: "grid" },
-]
-
-const TYPE_OPTIONS: { label: string; value: ElevationType }[] = [
-  { label: "Static", value: "static" },
-  { label: "Interactive", value: "interactive" },
-]
-
-const INTERACTION_STATE_NAMES: InteractionStateName[] = ["default", "hover", "active"]
-
-const LAYER_COUNT_OPTIONS: { label: string; value: string }[] = [
-  { label: "Global", value: "global" },
-  { label: "Low", value: "3" },
-  { label: "Med", value: "5" },
-  { label: "High", value: "7" },
 ]
 
 export interface ElevationPreviewProps {
@@ -192,19 +99,46 @@ export function ElevationPreview({
   const [editingIndex, setEditingIndex] = useState<number | null>(null)
   const isList = layout === "list"
   const levelsClass = isList
-    ? "es-shadow-token-designer__levels es-shadow-token-designer__levels--list"
-    : "es-shadow-token-designer__levels"
+    ? "es-elevation-preview__levels es-elevation-preview__levels--list"
+    : "es-elevation-preview__levels"
 
   const handleCardClick = useCallback((index: number) => setEditingIndex(index), [])
   const handleModalClose = useCallback(() => setEditingIndex(null), [])
+
+  const sortedElevations = React.useMemo(() => {
+    const effectiveDepth = (level: ElevationLevel) =>
+      level.type === "interactive" && level.interactionStates
+        ? level.interactionStates.default.depth
+        : level.depth
+
+    return elevations
+      .map((level, i) => ({ level, originalIndex: i }))
+      .sort((a, b) => effectiveDepth(a.level) - effectiveDepth(b.level) || a.level.zIndex - b.level.zIndex)
+  }, [elevations])
+
+  const cssSnippets = useMemo(() =>
+    elevations.map((level, i) => {
+      const safeName = sanitiseCssName(level.name)
+      if (level.type === "interactive" && interactiveShadowStacks[i]) {
+        const lines: string[] = []
+        for (const stateName of INTERACTION_STATE_NAMES) {
+          if (level.enabledStates?.[stateName] === false) continue
+          lines.push(`--shadow-elevation-${safeName}-${stateName}:\n    ${interactiveShadowStacks[i][stateName]};`)
+        }
+        return lines.join("\n")
+      }
+      return `--shadow-elevation-${safeName}:\n    ${shadowStacks[i]};`
+    }),
+    [elevations, shadowStacks, interactiveShadowStacks],
+  )
 
   const editingLevel = editingIndex !== null ? elevations[editingIndex] : null
 
   return (
     <>
-      <div className="es-shadow-token-designer__preview-toolbar">
+      <div className="es-elevation-preview__toolbar">
         <PreviewColors preview={preview} onPreviewChange={onPreviewChange} />
-        <div className="es-shadow-token-designer__preview-controls">
+        <div className="es-elevation-preview__controls">
           <TabSelect
             options={LAYOUT_OPTIONS}
             value={layout}
@@ -217,17 +151,17 @@ export function ElevationPreview({
       </div>
       <LayoutGroup>
         <motion.div layout className={levelsClass}>
-          {elevations.map((level, i) => (
+          {sortedElevations.map(({ level, originalIndex }) => (
             <motion.div key={level.name} layout transition={{ type: "spring", stiffness: 400, damping: 30 }}>
               <ElevationCard
-                index={i}
+                index={originalIndex}
                 name={level.name}
-                depth={level.depth}
+                depth={level.type === "interactive" && level.interactionStates ? level.interactionStates.default.depth : level.depth}
                 zIndex={level.zIndex}
                 type={level.type}
-                shadowStack={shadowStacks[i]}
-                interactiveShadowStacks={interactiveShadowStacks[i]}
-                interactiveColorHsls={interactiveColorHsls[i]}
+                shadowStack={shadowStacks[originalIndex]}
+                interactiveShadowStacks={interactiveShadowStacks[originalIndex]}
+                interactiveColorHsls={interactiveColorHsls[originalIndex]}
                 componentBgHex={level.interactionStates
                   ? Object.fromEntries(
                       INTERACTION_STATE_NAMES.map((s) => [s, level.interactionStates![s].componentBgHex]),
@@ -238,6 +172,7 @@ export function ElevationPreview({
                       INTERACTION_STATE_NAMES.map((s) => [s, level.interactionStates![s].componentTextHex]),
                     ) as Record<InteractionStateName, string>
                   : undefined}
+                cssSnippet={cssSnippets[originalIndex]}
                 enabledStates={level.enabledStates}
                 preview={preview}
                 variant={isList ? "list" : "grid"}
@@ -257,101 +192,23 @@ export function ElevationPreview({
         className={editingLevel?.type === "interactive" ? "es-modal--interactive" : undefined}
       >
         {editingIndex !== null && editingLevel && (
-          editingLevel.type === "static" ? (
-            <div className="es-elevation-modal__grid" style={{ "--shadow-color": shadowColorHsl, ...(accentColorHsl ? { "--shadow-accent": accentColorHsl } : {}) } as React.CSSProperties}>
-              <div className="es-elevation-modal__column">
-                <div className="es-elevation-modal__card">
-                  <h3 className="es-title es-title--sm">Elevation Token</h3>
-                  <ElevationTokenFields
-                    editingIndex={editingIndex}
-                    editingLevel={editingLevel}
-                    showDepth
-                    onTypeChange={onTypeChange}
-                    onNameChange={onNameChange}
-                    onZIndexChange={onZIndexChange}
-                    onLayerCountChange={onLayerCountChange}
-                    onDepthChange={onDepthChange}
-                  />
-                </div>
-              </div>
-              <div className="es-elevation-modal__column">
-                <ShadowPreview
-                  bgHex={preview.bgHex}
-                  surfaceHex={preview.surfaceHex}
-                  shadowStack={shadowStacks[editingIndex]}
-                />
-              </div>
-            </div>
-          ) : editingLevel.interactionStates ? (
-            <div className="es-elevation-modal__grid" style={{ "--shadow-color": shadowColorHsl, ...(accentColorHsl ? { "--shadow-accent": accentColorHsl } : {}) } as React.CSSProperties}>
-              <div className="es-elevation-modal__column es-elevation-modal__column--scroll">
-                {INTERACTION_STATE_NAMES.map((stateName, i) => {
-                  const cfg = editingLevel.interactionStates![stateName]
-                  const stateStacks = interactiveShadowStacks[editingIndex]
-                  const stateColors = interactiveColorHsls[editingIndex]
-                  return (
-                    <React.Fragment key={stateName}>
-                      {i > 0 && <Divider />}
-                      <StatePanel
-                        name={stateName}
-                        config={cfg}
-                        isActive={false}
-                        grouped
-                        flat
-                        enabled={editingLevel.enabledStates?.[stateName] !== false}
-                        onEnabledChange={stateName !== "default" ? (enabled) => onInteractionStateEnabledChange(editingIndex, stateName, enabled) : undefined}
-                        shadowStack={stateStacks?.[stateName] ?? "none"}
-                        shadowColorHsl={stateColors?.[stateName]?.shadow ?? "0 0% 0%"}
-                        accentColorHsl={stateColors?.[stateName]?.accent ?? null}
-                        preview={{
-                          bgHex: preview.bgHex,
-                          componentBgHex: cfg.componentBgHex,
-                          componentTextHex: cfg.componentTextHex,
-                        }}
-                        onSliderChange={(key, value) => onInteractionStateChange(editingIndex, stateName, key, value)}
-                        onShadowColorChange={(hex) => onInteractionStateChange(editingIndex, stateName, "shadowColorHex", hex)}
-                        onAccentColorChange={(hex) => onInteractionStateChange(editingIndex, stateName, "accentColorHex", hex)}
-                        onComponentBgChange={(hex) => onInteractionStateChange(editingIndex, stateName, "componentBgHex", hex)}
-                        onComponentTextChange={(hex) => onInteractionStateChange(editingIndex, stateName, "componentTextHex", hex)}
-                      />
-                    </React.Fragment>
-                  )
-                })}
-              </div>
-              <div className="es-elevation-modal__column">
-                <ShadowPreview
-                  variant="button"
-                  buttonLabel={editingLevel.name}
-                  className="es-shadow-preview--panel"
-                  bgHex={preview.bgHex}
-                  surfaceHex={preview.surfaceHex}
-                  shadowStack="none"
-                  interactiveShadowStacks={
-                    interactiveShadowStacks[editingIndex] ?? { default: "none", hover: "none", active: "none" }
-                  }
-                  interactiveColorHsls={interactiveColorHsls[editingIndex]}
-                  componentBgHex={Object.fromEntries(
-                    INTERACTION_STATE_NAMES.map((s) => [s, editingLevel.interactionStates![s].componentBgHex]),
-                  ) as Record<InteractionStateName, string>}
-                  componentTextHex={Object.fromEntries(
-                    INTERACTION_STATE_NAMES.map((s) => [s, editingLevel.interactionStates![s].componentTextHex]),
-                  ) as Record<InteractionStateName, string>}
-                  enabledStates={editingLevel.enabledStates}
-                />
-                <div className="es-elevation-modal__card">
-                  <h3 className="es-title es-title--sm">Elevation Token</h3>
-                  <ElevationTokenFields
-                    editingIndex={editingIndex}
-                    editingLevel={editingLevel}
-                    onTypeChange={onTypeChange}
-                    onNameChange={onNameChange}
-                    onZIndexChange={onZIndexChange}
-                    onLayerCountChange={onLayerCountChange}
-                  />
-                </div>
-              </div>
-            </div>
-          ) : null
+          <ElevationEditModal
+            editingIndex={editingIndex}
+            editingLevel={editingLevel}
+            preview={preview}
+            shadowColorHsl={shadowColorHsl}
+            accentColorHsl={accentColorHsl}
+            shadowStacks={shadowStacks}
+            interactiveShadowStacks={interactiveShadowStacks}
+            interactiveColorHsls={interactiveColorHsls}
+            onTypeChange={onTypeChange}
+            onNameChange={onNameChange}
+            onZIndexChange={onZIndexChange}
+            onDepthChange={onDepthChange}
+            onLayerCountChange={onLayerCountChange}
+            onInteractionStateChange={onInteractionStateChange}
+            onInteractionStateEnabledChange={onInteractionStateEnabledChange}
+          />
         )}
       </Modal>
     </>

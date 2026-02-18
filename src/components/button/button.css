@@ -37,7 +37,7 @@
 /* ── Sizes ───────────────────────────────────────────────────────── */
 
 .es-button--xs {
-  padding: var(--tab-select-sm-padding-y) var(--tab-select-sm-padding-x);
+  padding: var(--button-spacing-xs-y) var(--button-spacing-xs-x);
   font-size: var(--text-size-80);
   font-weight: 600;
   line-height: 1;
@@ -70,11 +70,11 @@
 }
 
 .es-button--high:hover:not(:disabled) {
-  background: var(--color-blue-200);
+  background: var(--color-blue-600);
 }
 
 .es-button--high:active:not(:disabled) {
-  background: var(--color-pink-600);
+  background: var(--color-blue-800);
 }
 
 /* ── Medium emphasis ─────────────────────────────────────────────── */
@@ -117,10 +117,46 @@
   background: var(--interactive-default);
 }
 
+/* ── Icon variant ────────────────────────────────────────────────── */
+
+.es-button--icon {
+  padding: 0;
+}
+
+.es-button--icon.es-button--xs { width: var(--button-icon-size-xs); height: var(--button-icon-size-xs); }
+.es-button--icon.es-button--sm { width: var(--button-icon-size-sm); height: var(--button-icon-size-sm); }
+.es-button--icon.es-button--md { width: var(--button-icon-size-md); height: var(--button-icon-size-md); }
+.es-button--icon.es-button--lg { width: var(--button-icon-size-lg); height: var(--button-icon-size-lg); }
+
+.es-button--icon > svg {
+  width: var(--button-icon-scale);
+  height: var(--button-icon-scale);
+}
+
+/* ── Destructive color ──────────────────────────────────────────── */
+
+.es-button--destructive.es-button--low {
+  color: var(--text-tertiary);
+}
+
+.es-button--destructive.es-button--low:hover:not(:disabled) {
+  color: var(--color-red-600);
+  background: var(--color-red-100);
+}
+
+.es-button--destructive.es-button--low:active:not(:disabled) {
+  color: var(--color-red-600);
+  background: var(--color-red-200);
+}
+
+.es-button--destructive.es-button--low::after {
+  border-color: transparent;
+}
+
 /* ── Multistate internals ────────────────────────────────────────── */
 
 .es-button--multistate {
-  overflow: hidden;
+  overflow: clip;
 }
 
 .es-button__state-content {
@@ -138,8 +174,10 @@
 
 .es-button__icon {
   position: absolute;
-  left: 0;
-  top: 0;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .es-button__label-measure {

@@ -1,7 +1,0 @@
-{
-  "remove-button": {
-    "size":       { "$value": "2rem" },
-    "padding":    { "$value": "0.25rem" },
-    "icon-scale": { "$value": "60%" }
-  }
-}
